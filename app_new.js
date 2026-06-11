@@ -66,9 +66,35 @@ let state = {
     editingLoanId: null
 };
 
-function loadState() {
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwc_px0IQX27lExLyvFlpnhPg0xJHu8_8_16ULQAzG11RYGuE0bCD3XY5U1Va4XMi21/exec";
+
+let syncCounter = 0;
+function showSync() {
+    syncCounter++;
+    const overlay = document.getElementById("sync-overlay");
+    if (overlay) overlay.classList.remove("hidden");
+}
+
+function hideSync() {
+    syncCounter--;
+    if (syncCounter <= 0) {
+        syncCounter = 0;
+        const overlay = document.getElementById("sync-overlay");
+        if (overlay) overlay.classList.add("hidden");
+    }
+}
+
+async function loadState() {
+    showSync();
     try {
-        const stored = localStorage.getItem("jccb_gold_loan_state");
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const data = await response.text();
+        
+        let stored = null;
+        if (data && data.trim() !== "" && data.trim() !== "{}") {
+            stored = data;
+        }
+
         if (stored) {
             state = JSON.parse(stored);
             
@@ -166,18 +192,32 @@ function loadState() {
             });
             
             state.currentSession = null;
-            saveState();
+            await saveState();
         }
     } catch (e) {
-        console.error("Error loading local storage state", e);
+        console.error("Error loading remote state", e);
+        alert("Failed to connect to the central database. Please check your internet connection.");
+    } finally {
+        hideSync();
     }
 }
 
-function saveState() {
+async function saveState() {
+    showSync();
     try {
-        localStorage.setItem("jccb_gold_loan_state", JSON.stringify(state));
+        const dataStr = JSON.stringify(state);
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            body: dataStr,
+            headers: {
+                "Content-Type": "text/plain"
+            }
+        });
     } catch (e) {
-        console.error("Error saving state", e);
+        console.error("Error saving remote state", e);
+        alert("Failed to sync data to the central database. Please check your internet connection.");
+    } finally {
+        hideSync();
     }
 }
 
@@ -3659,8 +3699,8 @@ function initBackupCenter() {
 }
 
 // ==================== APP INITIALIZATION ====================
-document.addEventListener("DOMContentLoaded", () => {
-    loadState();
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadState();
     initTabs();
     initAuth();
     initFormSubmit();
