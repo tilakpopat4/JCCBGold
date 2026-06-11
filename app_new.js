@@ -2082,7 +2082,28 @@ function printDailyVouchers() {
     }
 
     printArea.innerHTML = html;
-    window.print();
+    triggerPrintWhenReady();
+}
+
+function triggerPrintWhenReady() {
+    const printArea = document.getElementById("print-area");
+    const images = printArea.querySelectorAll('img');
+    let loadedCount = 0;
+    if (images.length === 0) {
+        setTimeout(() => window.print(), 500);
+    } else {
+        images.forEach(img => {
+            if (img.complete) {
+                loadedCount++;
+                if (loadedCount === images.length) setTimeout(() => window.print(), 500);
+            } else {
+                img.onload = img.onerror = () => {
+                    loadedCount++;
+                    if (loadedCount === images.length) setTimeout(() => window.print(), 500);
+                };
+            }
+        });
+    }
 }
 
 // ==================== BRANCH MASTER VIEW ====================
@@ -3221,7 +3242,7 @@ function printVoucher(loanId, format) {
         `;
     }
 
-    window.print();
+    triggerPrintWhenReady();
 }
 
 // Convert Number to Gujarati Words
