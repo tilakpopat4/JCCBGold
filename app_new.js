@@ -2082,7 +2082,10 @@ function renderBranchMasterList() {
             <td><code class="text-muted">${passwordLabel}</code></td>
             <td>
                 ${isHO ? '<span class="text-muted">Read-Only</span>' : `
-                    <button class="btn-icon btn-icon-red" onclick="deleteBranch('${b.code}')">
+                    <button class="btn-icon" style="color:var(--primary); margin-right:8px;" onclick="editBranch('${b.code}')" title="Edit Branch Name">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="btn-icon btn-icon-red" onclick="deleteBranch('${b.code}')" title="Delete Branch">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 `}
@@ -2129,6 +2132,28 @@ function deleteBranch(code) {
     if (code === "99") return;
     if (confirm(`Are you sure you want to delete branch ${code}?`)) {
         state.branches = state.branches.filter(b => b.code !== code);
+        saveState();
+        renderBranchMasterList();
+        initAuth();
+    }
+}
+
+function editBranch(code) {
+    if (state.currentSession.code !== "99") {
+        alert("Error: Only Head Office can edit branch records.");
+        return;
+    }
+    if (code === "99") return;
+    
+    const branch = state.branches.find(b => b.code === code);
+    if (!branch) return;
+    
+    const newName = prompt(`Enter new name for branch ${code}:`, branch.name);
+    if (newName && newName.trim() !== "") {
+        branch.name = newName.trim().toUpperCase();
+        if (!branch.name.endsWith(" BRANCH")) {
+            branch.name += " BRANCH";
+        }
         saveState();
         renderBranchMasterList();
         initAuth();
