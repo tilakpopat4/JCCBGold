@@ -2663,7 +2663,7 @@ function printVoucher(loanId, format) {
                         </p>
                         
                         <p style="text-indent:20px; margin:0 0 5px 0;">
-                            "વેલ્યુએશન રિપોર્ટમાં દર્શાવેલા તમામ સોનાના દાગીનાઓ શરાફે મારી હાજરીમાં એક સીલબંધ પેકેટ બનાવી, એક કાગળનું લેબલ બનાવી મારી હાજરીમાં બેંકના અધિકારીની સહી કરાવી દાગીનાના પેકેટ ઉપર ઉપર ચોટાડી તૈયાર થયેલ સદર સીલબંધ પેકેટમાં રાખેલ સોનાના દાગીના હું બેંકને થાલમાં આપું છું."
+                            "વેલ્યુએશન રિપોર્ટમાં દર્શાવેલા તમામ સોનાના દાગીનાઓ શરાફે મારી હાજરીમાં એક સીલબંધ પેકેટ બનાવી, એક કાગળનું લેબલ બનાવી મારી હાજરીમાં બેંકના અધિકારીની અને મારી સહી કરાવી દાગીનાના પેકેટ ઉપર ઉપર ચોટાડી તૈયાર થયેલ સદર સીલબંધ પેકેટમાં રાખેલ સોનાના દાગીના હું બેંકને થાલમાં આપું છું."
                         </p>
                         
                         <p style="text-indent:20px; margin:0 0 6px 0;">
@@ -2678,9 +2678,11 @@ function printVoucher(loanId, format) {
                             <div>તારીખઃ- ${formatDateDMY(loan.date)}</div>
                         </div>
                         <div style="text-align:right;">
-                            <div style="height:50px;"></div> <!-- Signature space -->
-                            <div style="margin-bottom:3px;">X ------------------------------------------</div>
-                            <div style="font-weight:700; padding-right:45px;">(${loan.borrowerName})</div>
+                            <div style="display:inline-block; text-align:left;">
+                                <div style="height:50px;"></div> <!-- Signature space -->
+                                <div style="margin-bottom:3px;">X ------------------------------------------</div>
+                                <div style="font-weight:700;">(${loan.borrowerName})</div>
+                            </div>
                         </div>
                     </div>
  
