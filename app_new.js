@@ -39,7 +39,7 @@ const DEFAULT_ACCOUNT_SEEDS = {
     "GOD-3553": 9001
 };
 
-const LOGO_SRC = "file:///C:/Users/RJP079/.gemini/antigravity/brain/fe5b05dc-4926-4a62-bca7-98ef0f110394/media__1780901610081.jpg";
+const LOGO_SRC = "jccb-logo.png";
 
 let currentUploadedCustPhoto = "";
 let currentUploadedGoldPhoto = "";

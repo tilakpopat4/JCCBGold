@@ -1,4 +1,4 @@
-// ==================== INITIAL SEED DATA ====================
+﻿// ==================== INITIAL SEED DATA ====================
 const INITIAL_BRANCHES = [
     { code: "99", name: "HEAD OFFICE" },
     { code: "01", name: "AZADCHOWK BRANCH" },
@@ -20,11 +20,11 @@ const INITIAL_BRANCHES = [
 ];
 
 const INITIAL_PRODUCTS = [
-    { id: "1", code: "GW-3725", minAmt: 0, maxAmt: 50000, rate: 11.00, desc: "Gold Loan up to ₹50,000 (GW-3725) 11.00% FIX" },
-    { id: "2", code: "GW-3725", minAmt: 50001, maxAmt: 100000, rate: 11.50, desc: "Gold Loan ₹50,001 to ₹100,000 (GW-3725) 11.50% FIX" },
-    { id: "3", code: "GD-3524", minAmt: 100001, maxAmt: 200000, rate: 11.50, desc: "Gold Loan ₹100,001 to ₹200,000 (GD-3524) 11.50% FIX" },
-    { id: "4", code: "3527", minAmt: 200001, maxAmt: 999999999, rate: 11.50, desc: "Gold Loan above ₹200,000 (3527) 11.50% FIX" },
-    { id: "5", code: "3553", minAmt: 200001, maxAmt: 999999999, rate: 11.50, desc: "Gold Loan above ₹200,000 (Overdraft) (3553) 11.50% FIX" }
+    { id: "1", code: "GW-3725", minAmt: 0, maxAmt: 50000, rate: 11.00, desc: "Gold Loan up to â‚¹50,000 (GW-3725) 11.00% FIX" },
+    { id: "2", code: "GW-3725", minAmt: 50001, maxAmt: 100000, rate: 11.50, desc: "Gold Loan â‚¹50,001 to â‚¹100,000 (GW-3725) 11.50% FIX" },
+    { id: "3", code: "GD-3524", minAmt: 100001, maxAmt: 200000, rate: 11.50, desc: "Gold Loan â‚¹100,001 to â‚¹200,000 (GD-3524) 11.50% FIX" },
+    { id: "4", code: "3527", minAmt: 200001, maxAmt: 999999999, rate: 11.50, desc: "Gold Loan above â‚¹200,000 (3527) 11.50% FIX" },
+    { id: "5", code: "3553", minAmt: 200001, maxAmt: 999999999, rate: 11.50, desc: "Gold Loan above â‚¹200,000 (Overdraft) (3553) 11.50% FIX" }
 ];
 
 const INITIAL_VALUERS = [
@@ -39,7 +39,7 @@ const DEFAULT_ACCOUNT_SEEDS = {
     "3553": 9001
 };
 
-const LOGO_SRC = "file:///C:/Users/RJP079/.gemini/antigravity/brain/fe5b05dc-4926-4a62-bca7-98ef0f110394/media__1780901610081.jpg";
+const LOGO_SRC = "jccb-logo.png";
 
 let currentUploadedCustPhoto = "";
 let currentUploadedGoldPhoto = "";
@@ -457,7 +457,7 @@ function updateDashboardStats() {
     const totalWeight = viewLoans.reduce((sum, item) => sum + parseFloat(item.goldWeight || 0), 0);
     const totalValuers = state.valuers.length;
 
-    totalAmountElem.textContent = `₹${totalAmount.toLocaleString("en-IN")}`;
+    totalAmountElem.textContent = `â‚¹${totalAmount.toLocaleString("en-IN")}`;
     totalAccountsElem.textContent = totalAccounts;
     totalWeightElem.textContent = `${totalWeight.toFixed(3)} g`;
     totalValuersElem.textContent = totalValuers;
@@ -502,7 +502,7 @@ function updateDashboardStats() {
         if (rateVal && rateVal > 1000) {
             state.goldRates[todayStr] = rateVal;
             saveState();
-            alert(`Today's gold rate ₹${rateVal}/10g saved.`);
+            alert(`Today's gold rate â‚¹${rateVal}/10g saved.`);
             updateDashboardStats();
             prepareEntryForm();
         } else {
@@ -530,7 +530,7 @@ function renderDashboardRecentTable(loansList) {
             <td><strong>${loan.accountNo}</strong></td>
             <td>${loan.borrowerName}</td>
             <td><span class="gold-badge">${loan.productCode}</span></td>
-            <td>₹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</td>
+            <td>â‚¹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</td>
             <td>Packet #${loan.packetNo}</td>
         `;
         tbody.appendChild(tr);
@@ -723,10 +723,10 @@ function checkGoldRateForDate(dateStr) {
 
     if (rate) {
         rateWarningAlert.classList.add("hidden");
-        valRateDisplay.textContent = `₹${rate.toLocaleString("en-IN")}`;
+        valRateDisplay.textContent = `â‚¹${rate.toLocaleString("en-IN")}`;
     } else {
         rateWarningAlert.classList.remove("hidden");
-        valRateDisplay.textContent = `₹0 (Not Set)`;
+        valRateDisplay.textContent = `â‚¹0 (Not Set)`;
         
         const isHO = (state.currentSession && state.currentSession.code === "99");
         const inlineInput = document.getElementById("inline-gold-rate");
@@ -855,8 +855,8 @@ function calculateCharges() {
     const marketValue = Math.round((weight / 10) * marketRate);
     const eligibleAmount = Math.round(marketValue * 0.75);
     
-    document.getElementById("val-market-val-display").textContent = `₹${marketValue.toLocaleString("en-IN")}`;
-    document.getElementById("val-eligible-display").textContent = `₹${eligibleAmount.toLocaleString("en-IN")}`;
+    document.getElementById("val-market-val-display").textContent = `â‚¹${marketValue.toLocaleString("en-IN")}`;
+    document.getElementById("val-eligible-display").textContent = `â‚¹${eligibleAmount.toLocaleString("en-IN")}`;
 
     let ltv = 0;
     if (marketValue > 0) {
@@ -986,9 +986,9 @@ function updateTotals() {
     const netDisbursal = Math.max(0, amount - roundedTotalDeductions);
     const roundedNetDisbursal = Math.round(netDisbursal * 100) / 100;
 
-    document.getElementById("summary-sanctioned-amt").textContent = `₹${amount.toLocaleString("en-IN")}`;
-    document.getElementById("summary-deductions-amt").textContent = `₹${roundedTotalDeductions.toLocaleString("en-IN")}`;
-    document.getElementById("summary-net-disbursal").textContent = `₹${roundedNetDisbursal.toLocaleString("en-IN")}`;
+    document.getElementById("summary-sanctioned-amt").textContent = `â‚¹${amount.toLocaleString("en-IN")}`;
+    document.getElementById("summary-deductions-amt").textContent = `â‚¹${roundedTotalDeductions.toLocaleString("en-IN")}`;
+    document.getElementById("summary-net-disbursal").textContent = `â‚¹${roundedNetDisbursal.toLocaleString("en-IN")}`;
 }
 
 function generateNextAccountNumber(schemeCode) {
@@ -1278,10 +1278,10 @@ function renderLoanRegister() {
                 <td>Packet #${loan.packetNo}</td>
                 <td>${loan.borrowerName}</td>
                 <td><small class="gold-badge">${loan.productCode}</small></td>
-                <td>₹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</td>
+                <td>â‚¹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</td>
                 <td>${parseFloat(loan.goldWeight).toFixed(3)}g</td>
-                <td>₹${parseFloat(loan.totalCharges).toLocaleString("en-IN")}</td>
-                <td class="bold-text green-color">₹${parseFloat(loan.netDisbursal).toLocaleString("en-IN")}</td>
+                <td>â‚¹${parseFloat(loan.totalCharges).toLocaleString("en-IN")}</td>
+                <td class="bold-text green-color">â‚¹${parseFloat(loan.netDisbursal).toLocaleString("en-IN")}</td>
                 <td>
                     <button class="btn btn-secondary-sm" onclick="openPrintModal('${loan.id}')">
                         <i class="fa-solid fa-print"></i> Print
@@ -1591,7 +1591,7 @@ function loadDailyVouchersSummary() {
         tr.innerHTML = `
             <td><strong>${v.title}</strong></td>
             <td><code>${v.code}</code></td>
-            <td class="bold-text">₹${v.amount.toLocaleString("en-IN")}.00</td>
+            <td class="bold-text">â‚¹${v.amount.toLocaleString("en-IN")}.00</td>
             <td><small class="text-muted">${numberToWords(v.amount)}</small></td>
         `;
         tbody.appendChild(tr);
@@ -1656,7 +1656,7 @@ function printDailyVouchers() {
                         <div>
                             <div style="display:flex; justify-content:space-between; margin-bottom:6px; border-bottom:1.5px solid #222; padding-bottom:4px;">
                                 <span style="font-weight:700;">Account Header: ${voucher.code}</span>
-                                <span style="font-weight:800; font-size:11px;">₹ ${voucher.amount.toLocaleString("en-IN")}.00</span>
+                                <span style="font-weight:800; font-size:11px;">â‚¹ ${voucher.amount.toLocaleString("en-IN")}.00</span>
                             </div>
                             <div style="font-size:9.5px; margin-bottom: 6px;">
                                 <strong>Amount in Words:</strong> <em>${numberToWords(voucher.amount)}</em>
@@ -1814,7 +1814,7 @@ function renderProductMasterList() {
 
     state.products.forEach(p => {
         const tr = document.createElement("tr");
-        const limitText = p.maxAmt > 99999999 ? `₹${p.minAmt.toLocaleString("en-IN")} & Above` : `₹${p.minAmt.toLocaleString("en-IN")} to ₹${p.maxAmt.toLocaleString("en-IN")}`;
+        const limitText = p.maxAmt > 99999999 ? `â‚¹${p.minAmt.toLocaleString("en-IN")} & Above` : `â‚¹${p.minAmt.toLocaleString("en-IN")} to â‚¹${p.maxAmt.toLocaleString("en-IN")}`;
         
         tr.innerHTML = `
             <td><strong>${p.code}</strong></td>
@@ -2059,16 +2059,16 @@ function printVoucher(loanId, format) {
                         <div class="print-panel-card">
                             <h4>Gold Evaluation & Valuation</h4>
                             <div class="p-row"><span>Ornaments Weight:</span><span class="p-val">${parseFloat(loan.goldWeight).toFixed(3)} Grams</span></div>
-                            <div class="p-row"><span>Gold Market Rate (/10g):</span><span class="p-val">₹${parseFloat(loan.marketRate).toLocaleString("en-IN")}</span></div>
-                            <div class="p-row"><span>Ornaments Market Value:</span><span class="p-val">₹${parseFloat(loan.marketValue).toLocaleString("en-IN")}</span></div>
-                            <div class="p-row"><span>Max Eligible Loan (75%):</span><span class="p-val">₹${parseFloat(loan.eligibleAmount).toLocaleString("en-IN")}</span></div>
+                            <div class="p-row"><span>Gold Market Rate (/10g):</span><span class="p-val">â‚¹${parseFloat(loan.marketRate).toLocaleString("en-IN")}</span></div>
+                            <div class="p-row"><span>Ornaments Market Value:</span><span class="p-val">â‚¹${parseFloat(loan.marketValue).toLocaleString("en-IN")}</span></div>
+                            <div class="p-row"><span>Max Eligible Loan (75%):</span><span class="p-val">â‚¹${parseFloat(loan.eligibleAmount).toLocaleString("en-IN")}</span></div>
                             <div class="p-row"><span>Ornaments Description:</span><span class="p-val" style="font-size:8px;">${loan.ornamentsDesc}</span></div>
                             <div class="p-row"><span>Authorized Soni Valuer:</span><span class="p-val" style="font-size:8px;">${valuer.name}</span></div>
                         </div>
 
                         <div class="print-panel-card">
                             <h4>Loan Parameters</h4>
-                            <div class="p-row"><span>Sanctioned Amount:</span><span class="p-val" style="font-size:12px;">₹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</span></div>
+                            <div class="p-row"><span>Sanctioned Amount:</span><span class="p-val" style="font-size:12px;">â‚¹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</span></div>
                             <div class="p-row"><span>Interest Rate (Fix):</span><span class="p-val">${loan.interestRate}</span></div>
                             <div class="p-row"><span>Valuer Savings A/c No:</span><span class="p-val">${valuer.savingsAc}</span></div>
                             <div class="p-row"><span>Valuer Mobile No:</span><span class="p-val">${valuer.mobile}</span></div>
@@ -2080,54 +2080,54 @@ function printVoucher(loanId, format) {
                         <thead>
                             <tr>
                                 <th>Charge Description</th>
-                                <th>Amount (₹)</th>
+                                <th>Amount (â‚¹)</th>
                                 <th>Charge Description</th>
-                                <th>Amount (₹)</th>
+                                <th>Amount (â‚¹)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Share Capital (Group A)</td>
-                                <td>₹${parseFloat(loan.shareA).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.shareA).toFixed(2)}</td>
                                 <td>Service Charges</td>
-                                <td>₹${parseFloat(loan.serviceCharge).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.serviceCharge).toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Share Capital (Group B)</td>
-                                <td>₹${parseFloat(loan.shareB).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.shareB).toFixed(2)}</td>
                                 <td>Document Charges</td>
-                                <td>₹${parseFloat(loan.docCharge).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.docCharge).toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Member Fee</td>
-                                <td>₹${parseFloat(loan.memberFee).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.memberFee).toFixed(2)}</td>
                                 <td>Insurance Charges</td>
-                                <td>₹${parseFloat(loan.insCharge).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.insCharge).toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Valuation Fee</td>
-                                <td>₹${parseFloat(loan.valuationCharge).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.valuationCharge).toFixed(2)}</td>
                                 <td>CGST (9%)</td>
-                                <td>₹${parseFloat(loan.cgst).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.cgst).toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Stamp Duty</td>
-                                <td>₹${parseFloat(loan.stampCharge).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.stampCharge).toFixed(2)}</td>
                                 <td>SGST (9%)</td>
-                                <td>₹${parseFloat(loan.sgst).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.sgst).toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Manual Adjustment</td>
-                                <td>₹${parseFloat(loan.adjustment).toFixed(2)}</td>
+                                <td>â‚¹${parseFloat(loan.adjustment).toFixed(2)}</td>
                                 <td><strong>Total Deductions</strong></td>
-                                <td><strong>₹${parseFloat(loan.totalCharges).toFixed(2)}</strong></td>
+                                <td><strong>â‚¹${parseFloat(loan.totalCharges).toFixed(2)}</strong></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div class="print-net-banner">
                         <span>Net Loan Disbursal Amount (Net Payable):</span>
-                        <span class="disbursal-num">₹${parseFloat(loan.netDisbursal).toLocaleString("en-IN")}.00</span>
+                        <span class="disbursal-num">â‚¹${parseFloat(loan.netDisbursal).toLocaleString("en-IN")}.00</span>
                     </div>
 
                     <div style="font-size: 8px; line-height: 1.4; border: 1px solid #ddd; padding: 6px; margin-top: 10px;">
@@ -2183,15 +2183,15 @@ function printVoucher(loanId, format) {
                         <div class="print-panel-card" style="padding: 4px 6px;">
                             <h4 style="font-size: 8px; margin-bottom: 2px;">Evaluation Details</h4>
                             <div class="p-row"><span>Gold Weight:</span><span class="p-val">${parseFloat(loan.goldWeight).toFixed(3)}g</span></div>
-                            <div class="p-row"><span>Market Rate:</span><span class="p-val">₹${parseFloat(loan.marketRate)}</span></div>
-                            <div class="p-row"><span>Market Value:</span><span class="p-val">₹${parseFloat(loan.marketValue)}</span></div>
+                            <div class="p-row"><span>Market Rate:</span><span class="p-val">â‚¹${parseFloat(loan.marketRate)}</span></div>
+                            <div class="p-row"><span>Market Value:</span><span class="p-val">â‚¹${parseFloat(loan.marketValue)}</span></div>
                             <div class="p-row"><span>Inspector:</span><span class="p-val" style="font-size:7px;">${valuer.name.substring(0, 18)}</span></div>
                         </div>
 
                         <div class="print-panel-card" style="padding: 4px 6px;">
                             <h4 style="font-size: 8px; margin-bottom: 2px;">Financial Summary & Charges</h4>
-                            <div class="p-row"><span>Sanctioned Amount:</span><span class="p-val">₹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</span></div>
-                            <div class="p-row"><span>Total Deductions:</span><span class="p-val">₹${parseFloat(loan.totalCharges).toLocaleString("en-IN")}</span></div>
+                            <div class="p-row"><span>Sanctioned Amount:</span><span class="p-val">â‚¹${parseFloat(loan.loanAmount).toLocaleString("en-IN")}</span></div>
+                            <div class="p-row"><span>Total Deductions:</span><span class="p-val">â‚¹${parseFloat(loan.totalCharges).toLocaleString("en-IN")}</span></div>
                             <div class="p-row"><span>Interest Rate:</span><span class="p-val">${loan.interestRate}</span></div>
                             <div class="p-row"><span>Particulars:</span><span class="p-val" style="font-size:7.5px;">${loan.ornamentsDesc.substring(0, 28)}</span></div>
                         </div>
@@ -2199,7 +2199,7 @@ function printVoucher(loanId, format) {
 
                     <div class="print-net-banner-three">
                         <span>Net Loan Disbursed (Net Paid):</span>
-                        <span class="disbursal-num">₹${parseFloat(loan.netDisbursal).toLocaleString("en-IN")}.00</span>
+                        <span class="disbursal-num">â‚¹${parseFloat(loan.netDisbursal).toLocaleString("en-IN")}.00</span>
                     </div>
 
                     <div class="print-signatures-row-three">
@@ -2222,120 +2222,120 @@ function printVoucher(loanId, format) {
                 <div style="text-align:center; margin-bottom:10px; border-bottom:1.5px solid #000000; padding-bottom:8px; position:relative;">
                     <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:5px;">
                         <img src="${LOGO_SRC}" alt="JCCB Logo" style="width:40px; height:40px; object-fit:contain; border-radius:50%; border:1px solid #000000;">
-                        <h1 style="font-size:17px; font-weight:800; margin:0; font-family:'Outfit', 'Noto Sans Gujarati', sans-serif;">ધી જૂનાગઢ કોમર્શિયલ કો-ઓપરેટીવ બેંક લિ.</h1>
+                        <h1 style="font-size:17px; font-weight:800; margin:0; font-family:'Outfit', 'Noto Sans Gujarati', sans-serif;">àª§à«€ àªœà«‚àª¨àª¾àª—àª¢ àª•à«‹àª®àª°à«àª¶àª¿àª¯àª² àª•à«‹-àª“àªªàª°à«‡àªŸà«€àªµ àª¬à«‡àª‚àª• àª²àª¿.</h1>
                     </div>
-                    <p style="font-size:11px; margin:2px 0; font-weight:600; text-align:center;">હે.ઓ. : "ચંદ્રકાંત માલવિયા સ્મૃતિ ભવન", ચોકસી બજાર, જૂનાગઢ. ૩૬૨૦૦૧</p>
-                    <p style="font-size:13px; font-weight:800; margin:6px 0 0 0; text-align:center; text-decoration:underline;">સોનાનાં દાગીનાની જામીનગીરી પર કરજ માંગણીની અરજી</p>
+                    <p style="font-size:11px; margin:2px 0; font-weight:600; text-align:center;">àª¹à«‡.àª“. : "àªšàª‚àª¦à«àª°àª•àª¾àª‚àª¤ àª®àª¾àª²àªµàª¿àª¯àª¾ àª¸à«àª®à«ƒàª¤àª¿ àª­àªµàª¨", àªšà«‹àª•àª¸à«€ àª¬àªœàª¾àª°, àªœà«‚àª¨àª¾àª—àª¢. à«©à«¬à«¨à«¦à«¦à«§</p>
+                    <p style="font-size:13px; font-weight:800; margin:6px 0 0 0; text-align:center; text-decoration:underline;">àª¸à«‹àª¨àª¾àª¨àª¾àª‚ àª¦àª¾àª—à«€àª¨àª¾àª¨à«€ àªœàª¾àª®à«€àª¨àª—à«€àª°à«€ àªªàª° àª•àª°àªœ àª®àª¾àª‚àª—àª£à«€àª¨à«€ àª…àª°àªœà«€</p>
                 </div>
 
                 <!-- Centered small Customer Photo Block -->
                 <div style="display:flex; justify-content:center; margin: 10px 0;">
                     <div style="border: 1.5px solid #000000; width: 90px; height: 100px; display: flex; align-items: center; justify-content: center; background-color: #ffffff; overflow: hidden;">
-                        ${loan.custPhoto ? `<img src="${loan.custPhoto}" style="width:100%; height:100%; object-fit:cover;">` : `<span style="font-size:8px; text-align:center; padding:5px; color:#555;">ગ્રાહકનો ફોટો</span>`}
+                        ${loan.custPhoto ? `<img src="${loan.custPhoto}" style="width:100%; height:100%; object-fit:cover;">` : `<span style="font-size:8px; text-align:center; padding:5px; color:#555;">àª—à«àª°àª¾àª¹àª•àª¨à«‹ àª«à«‹àªŸà«‹</span>`}
                     </div>
                 </div>
 
                 <!-- Requisition Letter Body in Exact Paragraph Format -->
                 <div style="font-size:11px; line-height:1.5; text-align:justify; margin-top:5px;">
-                    <p style="margin:0 0 4px 0; font-weight:700;">પ્રતિ,<br>મેનેજરશ્રી,<br>ધી જૂનાગઢ કોમર્શિયલ કો-ઓપરેટીવ બેંક લિ. <br>${loan.branchName} શાખા.</p>
-                    <p style="margin:0 0 6px 0; font-weight:700;">સાહેબશ્રી,</p>
+                    <p style="margin:0 0 4px 0; font-weight:700;">àªªà«àª°àª¤àª¿,<br>àª®à«‡àª¨à«‡àªœàª°àª¶à«àª°à«€,<br>àª§à«€ àªœà«‚àª¨àª¾àª—àª¢ àª•à«‹àª®àª°à«àª¶àª¿àª¯àª² àª•à«‹-àª“àªªàª°à«‡àªŸà«€àªµ àª¬à«‡àª‚àª• àª²àª¿. <br>${loan.branchName} àª¶àª¾àª–àª¾.</p>
+                    <p style="margin:0 0 6px 0; font-weight:700;">àª¸àª¾àª¹à«‡àª¬àª¶à«àª°à«€,</p>
                     
                     <p style="text-indent:25px; margin:0 0 6px 0;">
-                        "સવિનય હું <strong>${loan.borrowerName}</strong> સરનામું <strong>${loan.custAddress || "-"}</strong>, ઉ.વ. <strong>${loan.custAge || "-"}</strong>, ધંધો <strong>${loan.custOccupation || "-"}</strong>, મોબાઇલ નંબર <strong>${loan.custMobile || "-"}</strong>, સભાસદ નંબર <strong>${loan.memberNo || "-"}</strong>"
+                        "àª¸àªµàª¿àª¨àª¯ àª¹à«àª‚ <strong>${loan.borrowerName}</strong> àª¸àª°àª¨àª¾àª®à«àª‚ <strong>${loan.custAddress || "-"}</strong>, àª‰.àªµ. <strong>${loan.custAge || "-"}</strong>, àª§àª‚àª§à«‹ <strong>${loan.custOccupation || "-"}</strong>, àª®à«‹àª¬àª¾àª‡àª² àª¨àª‚àª¬àª° <strong>${loan.custMobile || "-"}</strong>, àª¸àª­àª¾àª¸àª¦ àª¨àª‚àª¬àª° <strong>${loan.memberNo || "-"}</strong>"
                     </p>
                     
                     <p style="text-indent:25px; margin:0 0 6px 0;">
-                        "આ સાથે સામેલ વેલ્યુએશન રિપોર્ટ મુજબના મારી માલિકીના સોનાનાં દાગીનાની જામીનગીરી ઉપર રૂ. <strong>${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong>, નું આપની બેંકમાંથી ધિરાણ <strong>${loan.loanPurpose || "-"}</strong>, ના હેતુ માટે મેળવવા માટે અરજી કરું છું. આથી હું તમો બેંકને ખાતરી અને બાંહેધરી આપું છું કે બેંકને જામીનગીરીમાં આપેલ દાગીના મારી સ્વતંત્ર માલિકીના છે. મેં બેંકના સોનાના દાગીનાની જામીનગીરી પર ધિરાણના નિયમો વાંચ્યા છે જે મને કબુલ-મંજુર છે. વધુમાં હું કબુલ રાખું છું કે રિઝર્વ બેંક ઓફ ઇન્ડિયાની વખતો વખતની સૂચના પ્રમાણે બેંક વ્યાજ મારા ખાતામાં ઉધરશે જે મને મંજુર છે. બેંકને નિયમાનુસાર દસ્તાવેજો લખી આપવા હું તૈયાર છું."
+                        "àª† àª¸àª¾àª¥à«‡ àª¸àª¾àª®à«‡àª² àªµà«‡àª²à«àª¯à«àªàª¶àª¨ àª°àª¿àªªà«‹àª°à«àªŸ àª®à«àªœàª¬àª¨àª¾ àª®àª¾àª°à«€ àª®àª¾àª²àª¿àª•à«€àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾àª‚ àª¦àª¾àª—à«€àª¨àª¾àª¨à«€ àªœàª¾àª®à«€àª¨àª—à«€àª°à«€ àª‰àªªàª° àª°à«‚. <strong>${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong>, àª¨à«àª‚ àª†àªªàª¨à«€ àª¬à«‡àª‚àª•àª®àª¾àª‚àª¥à«€ àª§àª¿àª°àª¾àª£ <strong>${loan.loanPurpose || "-"}</strong>, àª¨àª¾ àª¹à«‡àª¤à« àª®àª¾àªŸà«‡ àª®à«‡àª³àªµàªµàª¾ àª®àª¾àªŸà«‡ àª…àª°àªœà«€ àª•àª°à«àª‚ àª›à«àª‚. àª†àª¥à«€ àª¹à«àª‚ àª¤àª®à«‹ àª¬à«‡àª‚àª•àª¨à«‡ àª–àª¾àª¤àª°à«€ àª…àª¨à«‡ àª¬àª¾àª‚àª¹à«‡àª§àª°à«€ àª†àªªà«àª‚ àª›à«àª‚ àª•à«‡ àª¬à«‡àª‚àª•àª¨à«‡ àªœàª¾àª®à«€àª¨àª—à«€àª°à«€àª®àª¾àª‚ àª†àªªà«‡àª² àª¦àª¾àª—à«€àª¨àª¾ àª®àª¾àª°à«€ àª¸à«àªµàª¤àª‚àª¤à«àª° àª®àª¾àª²àª¿àª•à«€àª¨àª¾ àª›à«‡. àª®à«‡àª‚ àª¬à«‡àª‚àª•àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾ àª¦àª¾àª—à«€àª¨àª¾àª¨à«€ àªœàª¾àª®à«€àª¨àª—à«€àª°à«€ àªªàª° àª§àª¿àª°àª¾àª£àª¨àª¾ àª¨àª¿àª¯àª®à«‹ àªµàª¾àª‚àªšà«àª¯àª¾ àª›à«‡ àªœà«‡ àª®àª¨à«‡ àª•àª¬à«àª²-àª®àª‚àªœà«àª° àª›à«‡. àªµàª§à«àª®àª¾àª‚ àª¹à«àª‚ àª•àª¬à«àª² àª°àª¾àª–à«àª‚ àª›à«àª‚ àª•à«‡ àª°àª¿àªàª°à«àªµ àª¬à«‡àª‚àª• àª“àª« àª‡àª¨à«àª¡àª¿àª¯àª¾àª¨à«€ àªµàª–àª¤à«‹ àªµàª–àª¤àª¨à«€ àª¸à«‚àªšàª¨àª¾ àªªà«àª°àª®àª¾àª£à«‡ àª¬à«‡àª‚àª• àªµà«àª¯àª¾àªœ àª®àª¾àª°àª¾ àª–àª¾àª¤àª¾àª®àª¾àª‚ àª‰àª§àª°àª¶à«‡ àªœà«‡ àª®àª¨à«‡ àª®àª‚àªœà«àª° àª›à«‡. àª¬à«‡àª‚àª•àª¨à«‡ àª¨àª¿àª¯àª®àª¾àª¨à«àª¸àª¾àª° àª¦àª¸à«àª¤àª¾àªµà«‡àªœà«‹ àª²àª–à«€ àª†àªªàªµàª¾ àª¹à«àª‚ àª¤à«ˆàª¯àª¾àª° àª›à«àª‚."
                     </p>
                     
                     <p style="text-indent:25px; margin:0 0 6px 0;">
-                        "આજરોજ બેંક દ્વારા મંજુર કરાયેલ રકમ રૂ. <strong>${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong>, અંકે રૂપિયા <strong>${gujWords}</strong>, ના ધિરાણની સલામતી પેટે હું આ સાથે સામેલ વેલ્યુએશન રિપોર્ટમાં દર્શાવ્યા મુજબના મારી માલિકીના સોનાના દાગીના થાલમાં આપી બેંકને સોંપુ છું."
+                        "àª†àªœàª°à«‹àªœ àª¬à«‡àª‚àª• àª¦à«àªµàª¾àª°àª¾ àª®àª‚àªœà«àª° àª•àª°àª¾àª¯à«‡àª² àª°àª•àª® àª°à«‚. <strong>${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong>, àª…àª‚àª•à«‡ àª°à«‚àªªàª¿àª¯àª¾ <strong>${gujWords}</strong>, àª¨àª¾ àª§àª¿àª°àª¾àª£àª¨à«€ àª¸àª²àª¾àª®àª¤à«€ àªªà«‡àªŸà«‡ àª¹à«àª‚ àª† àª¸àª¾àª¥à«‡ àª¸àª¾àª®à«‡àª² àªµà«‡àª²à«àª¯à«àªàª¶àª¨ àª°àª¿àªªà«‹àª°à«àªŸàª®àª¾àª‚ àª¦àª°à«àª¶àª¾àªµà«àª¯àª¾ àª®à«àªœàª¬àª¨àª¾ àª®àª¾àª°à«€ àª®àª¾àª²àª¿àª•à«€àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾ àª¦àª¾àª—à«€àª¨àª¾ àª¥àª¾àª²àª®àª¾àª‚ àª†àªªà«€ àª¬à«‡àª‚àª•àª¨à«‡ àª¸à«‹àª‚àªªà« àª›à«àª‚."
                     </p>
                     
                     <p style="text-indent:25px; margin:0 0 6px 0;">
-                        "વેલ્યુએશન રિપોર્ટમાં દર્શાવેલા તમામ સોનાના દાગીનાઓ શરાફે મારી હાજરીમાં એક સીલબંધ પેકેટ બનાવી, એક કાગળનું લેબલ બનાવી મારી હાજરીમાં બેંકના અધિકારીની સહી કરાવી દાગીનાના પેકેટ ઉપર ઉપર ચોટાડી તૈયાર થયેલ સદર સીલબંધ પેકેટમાં રાખેલ સોનાના દાગીના હું બેંકને થાલમાં આપું છું."
+                        "àªµà«‡àª²à«àª¯à«àªàª¶àª¨ àª°àª¿àªªà«‹àª°à«àªŸàª®àª¾àª‚ àª¦àª°à«àª¶àª¾àªµà«‡àª²àª¾ àª¤àª®àª¾àª® àª¸à«‹àª¨àª¾àª¨àª¾ àª¦àª¾àª—à«€àª¨àª¾àª“ àª¶àª°àª¾àª«à«‡ àª®àª¾àª°à«€ àª¹àª¾àªœàª°à«€àª®àª¾àª‚ àªàª• àª¸à«€àª²àª¬àª‚àª§ àªªà«‡àª•à«‡àªŸ àª¬àª¨àª¾àªµà«€, àªàª• àª•àª¾àª—àª³àª¨à«àª‚ àª²à«‡àª¬àª² àª¬àª¨àª¾àªµà«€ àª®àª¾àª°à«€ àª¹àª¾àªœàª°à«€àª®àª¾àª‚ àª¬à«‡àª‚àª•àª¨àª¾ àª…àª§àª¿àª•àª¾àª°à«€àª¨à«€ àª¸àª¹à«€ àª•àª°àª¾àªµà«€ àª¦àª¾àª—à«€àª¨àª¾àª¨àª¾ àªªà«‡àª•à«‡àªŸ àª‰àªªàª° àª‰àªªàª° àªšà«‹àªŸàª¾àª¡à«€ àª¤à«ˆàª¯àª¾àª° àª¥àª¯à«‡àª² àª¸àª¦àª° àª¸à«€àª²àª¬àª‚àª§ àªªà«‡àª•à«‡àªŸàª®àª¾àª‚ àª°àª¾àª–à«‡àª² àª¸à«‹àª¨àª¾àª¨àª¾ àª¦àª¾àª—à«€àª¨àª¾ àª¹à«àª‚ àª¬à«‡àª‚àª•àª¨à«‡ àª¥àª¾àª²àª®àª¾àª‚ àª†àªªà«àª‚ àª›à«àª‚."
                     </p>
                     
                     <p style="text-indent:25px; margin:0 0 8px 0;">
-                        "ઉપરાંત આ દાગીનાના વારસદાર તરીકે હું <strong>${loan.custNomineeName || "-"}</strong> સંબંધે <strong>${loan.custNomineeRelation || "-"}</strong> ની નિમણુંક કરું છું."
+                        "àª‰àªªàª°àª¾àª‚àª¤ àª† àª¦àª¾àª—à«€àª¨àª¾àª¨àª¾ àªµàª¾àª°àª¸àª¦àª¾àª° àª¤àª°à«€àª•à«‡ àª¹à«àª‚ <strong>${loan.custNomineeName || "-"}</strong> àª¸àª‚àª¬àª‚àª§à«‡ <strong>${loan.custNomineeRelation || "-"}</strong> àª¨à«€ àª¨àª¿àª®àª£à«àª‚àª• àª•àª°à«àª‚ àª›à«àª‚."
                     </p>
                 </div>
 
                 <!-- Date & Branch Location Mappings -->
                 <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:11px; font-weight:700;">
-                    <div>સ્થળઃ- ${loan.branchName}</div>
-                    <div>તારીખઃ- ${formatDateDMY(loan.date)}</div>
+                    <div>àª¸à«àª¥àª³àªƒ- ${loan.branchName}</div>
+                    <div>àª¤àª¾àª°à«€àª–àªƒ- ${formatDateDMY(loan.date)}</div>
                 </div>
 
                 <!-- Borrower Signature Block aligned right -->
                 <div style="text-align:right; margin-top:12px; font-size:11px;">
-                    <div style="font-weight:700; margin-bottom:3px; padding-right:15px;">સહી ની જગ્યા રાખવી</div>
+                    <div style="font-weight:700; margin-bottom:3px; padding-right:15px;">àª¸àª¹à«€ àª¨à«€ àªœàª—à«àª¯àª¾ àª°àª¾àª–àªµà«€</div>
                     <div style="margin-bottom:3px;">------------------------------------------</div>
                     <div style="font-weight:700; padding-right:45px;">(${loan.borrowerName})</div>
                 </div>
 
-                <!-- Office Verification Block (ઓફિસ શેરો) -->
+                <!-- Office Verification Block (àª“àª«àª¿àª¸ àª¶à«‡àª°à«‹) -->
                 <div style="margin-top:10px; border-top:1.5px dashed #000000; padding-top:10px;">
-                    <div style="text-align:center; font-weight:800; font-size:11.5px; margin-bottom:8px; font-family:'Outfit', 'Noto Sans Gujarati', sans-serif;">========================== ઓફિસ શેરો ==========================</div>
+                    <div style="text-align:center; font-weight:800; font-size:11.5px; margin-bottom:8px; font-family:'Outfit', 'Noto Sans Gujarati', sans-serif;">========================== àª“àª«àª¿àª¸ àª¶à«‡àª°à«‹ ==========================</div>
                     
                     <table style="width:100%; border-collapse:collapse; margin-bottom:8px; font-size:10.5px; border:1.5px solid #000000;">
                         <tr style="border-bottom:1.5px solid #000000;">
-                            <td style="padding:4px 6px; font-weight:700; border-right:1.5px solid #000000; width:45%;">ખાતા નંબર (ખાતા નો પ્રકાર અને ખાતા નંબર લેવા):</td>
+                            <td style="padding:4px 6px; font-weight:700; border-right:1.5px solid #000000; width:45%;">àª–àª¾àª¤àª¾ àª¨àª‚àª¬àª° (àª–àª¾àª¤àª¾ àª¨à«‹ àªªà«àª°àª•àª¾àª° àª…àª¨à«‡ àª–àª¾àª¤àª¾ àª¨àª‚àª¬àª° àª²à«‡àªµàª¾):</td>
                             <td style="padding:4px 6px; font-weight:700;">${loan.accountNo || "-"}</td>
                         </tr>
                         <tr style="border-bottom:1.5px solid #000000;">
-                            <td style="padding:4px 6px; font-weight:700; border-right:1.5px solid #000000;">પેકેટ નંબરઃ-</td>
+                            <td style="padding:4px 6px; font-weight:700; border-right:1.5px solid #000000;">àªªà«‡àª•à«‡àªŸ àª¨àª‚àª¬àª°àªƒ-</td>
                             <td style="padding:4px 6px; font-weight:700;">#${loan.packetNo || "-"}</td>
                         </tr>
                         <tr>
-                            <td style="padding:4px 6px; font-weight:700; border-right:1.5px solid #000000;">સેવિંગ ખાતા નંબરઃ-</td>
+                            <td style="padding:4px 6px; font-weight:700; border-right:1.5px solid #000000;">àª¸à«‡àªµàª¿àª‚àª— àª–àª¾àª¤àª¾ àª¨àª‚àª¬àª°àªƒ-</td>
                             <td style="padding:4px 6px; font-weight:700;">${loan.custSavingsAc || "-"}</td>
                         </tr>
                     </table>
 
                     <p style="text-indent:25px; font-size:11px; line-height:1.5; text-align:justify; margin:8px 0;">
-                        "વેલ્યુએશન રિપોર્ટમાં દર્શાવ્યા મુજબના સોનાનાં દાગીના થાલમાં લઈને તેનીકુલ કિંમત રૂ. <strong>${parseFloat(loan.marketValue).toLocaleString("en-IN")}/-</strong> ના <strong>${ltv}%</strong> લેખે ધિરાણની રકમ રૂ. <strong>${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong> અંકે રકમ રૂ. <strong>${gujWords}</strong> નો બેંકના સોનાના દાગીના સામે ધિરાણના નિયમાનુસાર ચુકાદો કરવાની મંજુરી આપવામાં આવે છે. આજરોજ ઉપરોક્ત દાગીનાનું સીલબંધ પેકેટ અરજદાર પાસેથી સંભાળી લૉકરમાં મુકેલ છે."
+                        "àªµà«‡àª²à«àª¯à«àªàª¶àª¨ àª°àª¿àªªà«‹àª°à«àªŸàª®àª¾àª‚ àª¦àª°à«àª¶àª¾àªµà«àª¯àª¾ àª®à«àªœàª¬àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾àª‚ àª¦àª¾àª—à«€àª¨àª¾ àª¥àª¾àª²àª®àª¾àª‚ àª²àªˆàª¨à«‡ àª¤à«‡àª¨à«€àª•à«àª² àª•àª¿àª‚àª®àª¤ àª°à«‚. <strong>${parseFloat(loan.marketValue).toLocaleString("en-IN")}/-</strong> àª¨àª¾ <strong>${ltv}%</strong> àª²à«‡àª–à«‡ àª§àª¿àª°àª¾àª£àª¨à«€ àª°àª•àª® àª°à«‚. <strong>${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong> àª…àª‚àª•à«‡ àª°àª•àª® àª°à«‚. <strong>${gujWords}</strong> àª¨à«‹ àª¬à«‡àª‚àª•àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾ àª¦àª¾àª—à«€àª¨àª¾ àª¸àª¾àª®à«‡ àª§àª¿àª°àª¾àª£àª¨àª¾ àª¨àª¿àª¯àª®àª¾àª¨à«àª¸àª¾àª° àªšà«àª•àª¾àª¦à«‹ àª•àª°àªµàª¾àª¨à«€ àª®àª‚àªœà«àª°à«€ àª†àªªàªµàª¾àª®àª¾àª‚ àª†àªµà«‡ àª›à«‡. àª†àªœàª°à«‹àªœ àª‰àªªàª°à«‹àª•à«àª¤ àª¦àª¾àª—à«€àª¨àª¾àª¨à«àª‚ àª¸à«€àª²àª¬àª‚àª§ àªªà«‡àª•à«‡àªŸ àª…àª°àªœàª¦àª¾àª° àªªàª¾àª¸à«‡àª¥à«€ àª¸àª‚àª­àª¾àª³à«€ àª²à«‰àª•àª°àª®àª¾àª‚ àª®à«àª•à«‡àª² àª›à«‡."
                     </p>
 
                     <div style="font-weight:700; font-size:11px; margin-top:5px; margin-bottom:15px;">
-                        તારીખઃ- ${formatDateDMY(loan.date)}
+                        àª¤àª¾àª°à«€àª–àªƒ- ${formatDateDMY(loan.date)}
                     </div>
 
                     <!-- Sign-off blocks for Clerks & Managers -->
                     <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:11px; font-weight:700;">
                         <div style="width:40%; text-align:center;">
-                            સહી:..........................................................................<br>
-                            <span style="font-size:10px; font-weight:600;">(લોન ક્લાર્ક)</span>
+                            àª¸àª¹à«€:..........................................................................<br>
+                            <span style="font-size:10px; font-weight:600;">(àª²à«‹àª¨ àª•à«àª²àª¾àª°à«àª•)</span>
                         </div>
                         <div style="width:40%; text-align:center;">
-                            સહી:..........................................................................<br>
-                            <span style="font-size:10px; font-weight:600;">(શાખા પ્રબંધક)</span>
+                            àª¸àª¹à«€:..........................................................................<br>
+                            <span style="font-size:10px; font-weight:600;">(àª¶àª¾àª–àª¾ àªªà«àª°àª¬àª‚àª§àª•)</span>
                         </div>
                     </div>
                 </div>
             </div>
         `;
-    }��રકાર અને ખાતા નંબર): <span style="font-weight:700;">${loan.accountNo || "-"}</span></div>
-                        <div>પેકેટ નંબર: <span style="font-weight:700;">#${loan.packetNo || "-"}</span></div>
-                        <div>સેવિંગ ખાતા નંબર: <span style="font-weight:700;">${loan.custSavingsAc || "-"}</span></div>
+    }«àª°àª•àª¾àª° àª…àª¨à«‡ àª–àª¾àª¤àª¾ àª¨àª‚àª¬àª°): <span style="font-weight:700;">${loan.accountNo || "-"}</span></div>
+                        <div>àªªà«‡àª•à«‡àªŸ àª¨àª‚àª¬àª°: <span style="font-weight:700;">#${loan.packetNo || "-"}</span></div>
+                        <div>àª¸à«‡àªµàª¿àª‚àª— àª–àª¾àª¤àª¾ àª¨àª‚àª¬àª°: <span style="font-weight:700;">${loan.custSavingsAc || "-"}</span></div>
                     </div>
 
                     <p style="text-indent:20px; margin-bottom:15px; text-align:justify;">
-                        વેલ્યુએશન રિપોર્ટમાં દર્શાવ્યા મુજબના સોનાનાં દાગીના થાલમાં લઈને તેની કુલ કિંમત રૂ. <strong style="text-decoration:underline;">${parseFloat(loan.marketValue).toLocaleString("en-IN")}/-</strong> ના <strong style="text-decoration:underline;">${ltv}%</strong> લેખે ધિરાણની રકમ રૂ. <strong style="text-decoration:underline;">${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong> અંકે રકમ રૂ. <strong style="text-decoration:underline;">${gujWords}</strong> નો બેંકના સોનાના દાગીના સામે ધિરાણના નિયમાનુસાર ચુકાદો કરવાની મંજુરી આપવામાં આવે છે. આજરોજ ઉપરોક્ત દાગીનાનું સીલબંધ પેકેટ અરજદાર પાસેથી સંભાળી લૉકરમાં મુકેલ છે.
+                        àªµà«‡àª²à«àª¯à«àªàª¶àª¨ àª°àª¿àªªà«‹àª°à«àªŸàª®àª¾àª‚ àª¦àª°à«àª¶àª¾àªµà«àª¯àª¾ àª®à«àªœàª¬àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾àª‚ àª¦àª¾àª—à«€àª¨àª¾ àª¥àª¾àª²àª®àª¾àª‚ àª²àªˆàª¨à«‡ àª¤à«‡àª¨à«€ àª•à«àª² àª•àª¿àª‚àª®àª¤ àª°à«‚. <strong style="text-decoration:underline;">${parseFloat(loan.marketValue).toLocaleString("en-IN")}/-</strong> àª¨àª¾ <strong style="text-decoration:underline;">${ltv}%</strong> àª²à«‡àª–à«‡ àª§àª¿àª°àª¾àª£àª¨à«€ àª°àª•àª® àª°à«‚. <strong style="text-decoration:underline;">${parseFloat(loan.loanAmount).toLocaleString("en-IN")}/-</strong> àª…àª‚àª•à«‡ àª°àª•àª® àª°à«‚. <strong style="text-decoration:underline;">${gujWords}</strong> àª¨à«‹ àª¬à«‡àª‚àª•àª¨àª¾ àª¸à«‹àª¨àª¾àª¨àª¾ àª¦àª¾àª—à«€àª¨àª¾ àª¸àª¾àª®à«‡ àª§àª¿àª°àª¾àª£àª¨àª¾ àª¨àª¿àª¯àª®àª¾àª¨à«àª¸àª¾àª° àªšà«àª•àª¾àª¦à«‹ àª•àª°àªµàª¾àª¨à«€ àª®àª‚àªœà«àª°à«€ àª†àªªàªµàª¾àª®àª¾àª‚ àª†àªµà«‡ àª›à«‡. àª†àªœàª°à«‹àªœ àª‰àªªàª°à«‹àª•à«àª¤ àª¦àª¾àª—à«€àª¨àª¾àª¨à«àª‚ àª¸à«€àª²àª¬àª‚àª§ àªªà«‡àª•à«‡àªŸ àª…àª°àªœàª¦àª¾àª° àªªàª¾àª¸à«‡àª¥à«€ àª¸àª‚àª­àª¾àª³à«€ àª²à«‰àª•àª°àª®àª¾àª‚ àª®à«àª•à«‡àª² àª›à«‡.
                     </p>
 
                     <div style="margin-bottom:20px; font-weight:600;">
-                        તારીખ: <span style="font-weight:700;">${formatDateDMY(loan.date)}</span>
+                        àª¤àª¾àª°à«€àª–: <span style="font-weight:700;">${formatDateDMY(loan.date)}</span>
                     </div>
 
                     <div style="display:flex; justify-content:space-between; margin-top:25px; font-weight:600;">
                         <div style="width:45%; text-align:center;">
-                            સહી:..........................................................................<br>
-                            <span style="font-size:10.5px;">(લોન ક્લાર્ક)</span>
+                            àª¸àª¹à«€:..........................................................................<br>
+                            <span style="font-size:10.5px;">(àª²à«‹àª¨ àª•à«àª²àª¾àª°à«àª•)</span>
                         </div>
                         <div style="width:45%; text-align:center;">
-                            સહી:..........................................................................<br>
-                            <span style="font-size:10.5px;">(શાખા પ્રબંધક)</span>
+                            àª¸àª¹à«€:..........................................................................<br>
+                            <span style="font-size:10.5px;">(àª¶àª¾àª–àª¾ àªªà«àª°àª¬àª‚àª§àª•)</span>
                         </div>
                     </div>
                 </div>
@@ -2348,15 +2348,15 @@ function printVoucher(loanId, format) {
 
 // Convert Number to Gujarati Words
 function numberToGujaratiWords(amount) {
-    if (amount === 0) return "રૂપિયા શૂન્ય પુરા";
-    const units = ['', 'એક', 'બે', 'ત્રણ', 'ચાર', 'પાંચ', 'છ', 'સાત', 'આઠ', 'નવ', 'દસ', 'અગિયાર', 'બાર', 'તેર', 'ચૌદ', 'પંદર', 'સોળ', 'સત્તર', 'અઢાર', 'ઓગણીસ'];
-    const tens = ['', '', 'વીસ', 'ત્રીસ', 'ચાલીસ', 'પચાસ', 'સાઠ', 'સિત્તેર', 'એસી', 'નેવુ'];
+    if (amount === 0) return "àª°à«‚àªªàª¿àª¯àª¾ àª¶à«‚àª¨à«àª¯ àªªà«àª°àª¾";
+    const units = ['', 'àªàª•', 'àª¬à«‡', 'àª¤à«àª°àª£', 'àªšàª¾àª°', 'àªªàª¾àª‚àªš', 'àª›', 'àª¸àª¾àª¤', 'àª†àª ', 'àª¨àªµ', 'àª¦àª¸', 'àª…àª—àª¿àª¯àª¾àª°', 'àª¬àª¾àª°', 'àª¤à«‡àª°', 'àªšà«Œàª¦', 'àªªàª‚àª¦àª°', 'àª¸à«‹àª³', 'àª¸àª¤à«àª¤àª°', 'àª…àª¢àª¾àª°', 'àª“àª—àª£à«€àª¸'];
+    const tens = ['', '', 'àªµà«€àª¸', 'àª¤à«àª°à«€àª¸', 'àªšàª¾àª²à«€àª¸', 'àªªàªšàª¾àª¸', 'àª¸àª¾àª ', 'àª¸àª¿àª¤à«àª¤à«‡àª°', 'àªàª¸à«€', 'àª¨à«‡àªµà«'];
     
     function convertLessThanThousand(n) {
         if (n === 0) return "";
         let str = "";
         if (n >= 100) {
-            str += units[Math.floor(n / 100)] + " સો ";
+            str += units[Math.floor(n / 100)] + " àª¸à«‹ ";
             n %= 100;
         }
         if (n > 0) {
@@ -2384,19 +2384,19 @@ function numberToGujaratiWords(amount) {
     num %= 1000;
 
     if (crore > 0) {
-        words += convertLessThanThousand(crore) + " કરોડ ";
+        words += convertLessThanThousand(crore) + " àª•àª°à«‹àª¡ ";
     }
     if (lakh > 0) {
-        words += convertLessThanThousand(lakh) + " લાખ ";
+        words += convertLessThanThousand(lakh) + " àª²àª¾àª– ";
     }
     if (thousand > 0) {
-        words += convertLessThanThousand(thousand) + " હજાર ";
+        words += convertLessThanThousand(thousand) + " àª¹àªœàª¾àª° ";
     }
     if (num > 0) {
         words += convertLessThanThousand(num);
     }
 
-    return "રૂપિયા " + words.trim() + " પુરા";
+    return "àª°à«‚àªªàª¿àª¯àª¾ " + words.trim() + " àªªà«àª°àª¾";
 }
 
 // ==================== IMAGE COMPRESSION UTILITY ====================
@@ -2775,3 +2775,4 @@ document.addEventListener("DOMContentLoaded", () => {
         exitApp();
     }
 });
+
