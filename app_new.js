@@ -2721,13 +2721,15 @@ function printVoucher(loanId, format) {
                         <div style="display:flex; justify-content:space-between; margin-top:15px; font-size:13.5px; font-weight:700;">
                             <div style="width:40%; text-align:center;">
                                 <div style="height:50px;"></div> <!-- Signature space -->
-                                સહી: X..........................................................................<br>
-                                <span style="font-size:12px; font-weight:600;">(લોન ક્લાર્ક)</span>
+                                <div style="margin-bottom:3px;">સહી:</div>
+                                <div style="margin-bottom:3px;">X..........................................................................</div>
+                                <div style="font-size:12px; font-weight:600;">(લોન ક્લાર્ક)</div>
                             </div>
                             <div style="width:40%; text-align:center;">
                                 <div style="height:50px;"></div> <!-- Signature space -->
-                                સહી: X..........................................................................<br>
-                                <span style="font-size:12px; font-weight:600;">(શાખા પ્રબંધક)</span>
+                                <div style="margin-bottom:3px;">સહી:</div>
+                                <div style="margin-bottom:3px;">X..........................................................................</div>
+                                <div style="font-size:12px; font-weight:600;">(શાખા પ્રબંધક)</div>
                             </div>
                         </div>
                     </div>
@@ -2853,16 +2855,18 @@ function printVoucher(loanId, format) {
                     <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:4px; font-size:13.5px; font-weight:700;">
                         <div style="width:45%; text-align:center; padding-bottom:5px;">
                             <div style="height:45px;"></div> <!-- Signature space -->
-                            સહી: X....................................................<br>
-                            <span style="font-size:12px; font-weight:600;">(${loan.borrowerName})</span>
+                            <div style="margin-bottom:3px;">સહી:</div>
+                            <div style="margin-bottom:3px;">X....................................................</div>
+                            <div style="font-size:12px; font-weight:600;">(${loan.borrowerName})</div>
                         </div>
                         <div style="width:45%; text-align:center; display:flex; flex-direction:column; align-items:center;">
                             <div style="border: 1.5px dashed #000000; width: 60px; height: 75px; display: flex; align-items: center; justify-content: center; background-color: #ffffff; text-align:center; font-size:9.5px; font-weight:700; padding:4px; margin-bottom:4px;">
                                 રેવન્યુ સ્ટેમ્પ
                             </div>
                             <div style="width:100%;">
-                                સહી: X....................................................<br>
-                                <span style="font-size:12px; font-weight:600;">(${loan.borrowerName})</span>
+                                <div style="margin-bottom:3px;">સહી:</div>
+                                <div style="margin-bottom:3px;">X....................................................</div>
+                                <div style="font-size:12px; font-weight:600;">(${loan.borrowerName})</div>
                             </div>
                         </div>
                     </div>
