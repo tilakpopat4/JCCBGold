@@ -350,7 +350,7 @@ function initAuth() {
         state.branches.forEach(branch => {
             const option = document.createElement("option");
             option.value = branch.code;
-            option.textContent = `${branch.code} ${branch.name}`;
+            option.textContent = branch.code === "99" ? branch.name : `${branch.code} ${branch.name}`;
             loginBranchSelect.appendChild(option);
         });
     }
@@ -399,7 +399,7 @@ function initAuth() {
 function enterApp() {
     document.getElementById("login-container").classList.add("hidden");
     document.getElementById("app-container").classList.remove("hidden");
-    document.getElementById("current-user-branch").textContent = `${state.currentSession.code} ${state.currentSession.name}`;
+    document.getElementById("current-user-branch").textContent = state.currentSession.code === "99" ? state.currentSession.name : `${state.currentSession.code} ${state.currentSession.name}`;
     document.getElementById("welcome-branch-name").textContent = state.currentSession.name;
     
     // RBAC Nav Menu
@@ -1292,7 +1292,7 @@ function renderLoanRegister() {
     state.branches.forEach(b => {
         const opt = document.createElement("option");
         opt.value = b.code;
-        opt.textContent = `${b.code} ${b.name}`;
+        opt.textContent = b.code === "99" ? b.name : `${b.code} ${b.name}`;
         filterBranchSelect.appendChild(opt);
     });
 
@@ -2265,7 +2265,7 @@ function renderSettings() {
         state.branches.forEach(b => {
             const opt = document.createElement("option");
             opt.value = b.code;
-            opt.textContent = `${b.code} ${b.name}`;
+            opt.textContent = b.code === "99" ? b.name : `${b.code} ${b.name}`;
             branchSelect.appendChild(opt);
         });
 
