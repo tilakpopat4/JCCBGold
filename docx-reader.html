@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCCB DOCX Legal Text Extractor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1.5px solid #000000;
+        }
+        h2 {
+            margin-top: 0;
+            color: #0f1c3f;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+        }
+        .file-input-wrapper {
+            margin: 20px 0;
+        }
+        input[type="file"] {
+            border: 1.5px solid #000000;
+            padding: 10px;
+            border-radius: 6px;
+            width: 100%;
+            background: #f1f5f9;
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            border: 1.5px solid #000000;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 15px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #0f1c3f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn:hover {
+            background-color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>JCCB DOCX Legal Text Extractor</h2>
+        <p>Use this tool to extract the exact Gujarati paragraphs from the bank's <strong>gold loan entry.docx</strong> document. Since your command line tools are blocked by Group Policy, this runs fully in your web browser.</p>
+        
+        <div class="file-input-wrapper">
+            <label for="docx-file"><strong>Select docx file:</strong></label><br><br>
+            <input type="file" id="docx-file" accept=".docx">
+        </div>
+        
+        <div id="output-area" style="display:none;">
+            <h3>Extracted Text Content:</h3>
+            <textarea id="text-output" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('docx-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(evt) {
+                try {
+                    const arrayBuffer = evt.target.result;
+                    const zip = await JSZip.loadAsync(arrayBuffer);
+                    
+                    const docXmlFile = zip.file("word/document.xml");
+                    if (!docXmlFile) {
+                        alert("Could not find word/document.xml inside docx file. Ensure it is a valid Word document.");
+                        return;
+                    }
+                    
+                    const docXml = await docXmlFile.async("string");
+                    
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(docXml, "text/xml");
+                    
+                    const paragraphs = xmlDoc.getElementsByTagName("w:p");
+                    let output = "";
+                    
+                    for (let i = 0; i < paragraphs.length; i++) {
+                        const ts = paragraphs[i].getElementsByTagName("w:t");
+                        let pText = "";
+                        for (let j = 0; j < ts.length; j++) {
+                            pText += ts[j].textContent;
+                        }
+                        // Avoid adding multiple empty lines
+                        if (pText.trim().length > 0 || output.endsWith('\n\n') === false) {
+                            output += pText + "\n";
+                        }
+                    }
+                    
+                    document.getElementById('text-output').value = output;
+                    document.getElementById('output-area').style.display = 'block';
+                } catch (err) {
+                    console.error(err);
+                    alert("Error parsing document: " + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+</html>

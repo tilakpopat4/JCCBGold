@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Junagadh Commercial Co-operative Bank Ltd. - Gold Loan Portal</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Cropper.js for image cropping -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+</head>
+<body>
+
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div id="login-container" class="login-wrapper">
+        <div class="login-background-glows">
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+        </div>
+        <div class="login-card glassmorphism">
+            <div class="login-header">
+                <div class="bank-logo-container">
+                    <img src="file:///C:/Users/RJP079/.gemini/antigravity/brain/fe5b05dc-4926-4a62-bca7-98ef0f110394/media__1780901610081.jpg" alt="JCCB Logo" class="bank-login-logo">
+                </div>
+                <h2>The Junagadh Commercial Co-operative Bank Ltd.</h2>
+                <p class="subtitle">Head Office: Junagadh</p>
+                <div class="gold-badge">Gold Loan Portal</div>
+            </div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-branch"><i class="fa-solid fa-code-branch"></i> Select Branch</label>
+                    <select id="login-branch" required>
+                        <!-- Branch options populated dynamically via JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" id="toggle-password-btn" class="icon-button">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="login-error" class="error-alert hidden">
+                    <i class="fa-solid fa-circle-exclamation"></i> Incorrect Password!
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+            </form>
+            <div class="login-footer">
+                <p>Note: Head Office password is unique. Branches use the common password.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN DASHBOARD SYSTEM ==================== -->
+    <div id="app-container" class="app-layout hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-block">
+                    <img src="file:///C:/Users/RJP079/.gemini/antigravity/brain/fe5b05dc-4926-4a62-bca7-98ef0f110394/media__1780901610081.jpg" alt="JCCB Logo" class="sidebar-logo-img">
+                    <span class="logo-text">JCCB GOLD</span>
+                </div>
+                <div class="branch-indicator">
+                    <span class="indicator-dot"></span>
+                    <span id="current-user-branch">99 HEAD OFFICE</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="dashboard-view">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </button>
+                <button class="nav-item" data-tab="entry-view">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Loan Entry
+                </button>
+                <button class="nav-item" data-tab="register-view">
+                    <i class="fa-solid fa-list-check"></i> Loan Register
+                </button>
+                <button class="nav-item" data-tab="daily-vouchers-view">
+                    <i class="fa-solid fa-print"></i> Daily Vouchers
+                </button>
+                
+                <div class="nav-divider" id="masters-nav-divider">Masters</div>
+                <button class="nav-item" data-tab="branch-master-view" id="branch-master-nav">
+                    <i class="fa-solid fa-code-branch"></i> Branch Master
+                </button>
+                <button class="nav-item" data-tab="valuer-master-view">
+                    <i class="fa-solid fa-user-tie"></i> Valuer Master
+                </button>
+                <button class="nav-item" data-tab="customer-master-view">
+                    <i class="fa-solid fa-users"></i> Customer Master
+                </button>
+                <button class="nav-item" data-tab="product-master-view" id="product-master-nav">
+                    <i class="fa-solid fa-tags"></i> Product Master
+                </button>
+                
+                <div class="nav-divider">Configuration</div>
+                <button class="nav-item" data-tab="settings-view">
+                    <i class="fa-solid fa-sliders"></i> Account Settings
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-danger-outline btn-block">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-logo-area">
+                    <img src="file:///C:/Users/RJP079/.gemini/antigravity/brain/fe5b05dc-4926-4a62-bca7-98ef0f110394/media__1780901610081.jpg" alt="JCCB Logo" class="header-bank-logo">
+                    <div class="header-title-area">
+                        <h1>The Junagadh Commercial Co-operative Bank Ltd.</h1>
+                        <p class="subtitle">Gold Loan Entry & Accounting Portal</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="date-time-widget">
+                        <i class="fa-regular fa-calendar-days"></i>
+                        <span id="header-date">08-06-2026</span>
+                        <span class="time-sep">|</span>
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="header-time">11:00 AM</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Inner Views (Tabs) -->
+            <div class="content-body">
+                
+                <!-- 1. DASHBOARD VIEW -->
+                <section id="dashboard-view" class="tab-content">
+                    <div class="welcome-banner">
+                        <div class="welcome-text">
+                            <h2>Welcome, <span id="welcome-branch-name">HEAD OFFICE</span></h2>
+                            <p>Manage daily gold loan transactions and accounting logs efficiently.</p>
+                        </div>
+                        <!-- Today's Gold Rate Input Widget -->
+                        <div class="gold-rate-dashboard-card">
+                            <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <div class="rate-details">
+                                <label for="dashboard-gold-rate">Gold Market Rate (Rate/10g)</label>
+                                <div class="rate-input-group">
+                                    <span class="currency-symbol">₹</span>
+                                    <input type="number" id="dashboard-gold-rate" placeholder="e.g. 65000" min="1000">
+                                    <button id="save-gold-rate-btn" class="btn btn-gold">
+                                        <i class="fa-solid fa-floppy-disk"></i> Save
+                                    </button>
+                                </div>
+                                <span class="rate-note">* Set once per calendar date (Locked for the day once used)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card gold-grad-card">
+                            <div class="stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Loan Outstanding</h3>
+                                <div class="stat-value" id="stat-total-amount">₹0.00</div>
+                                <p class="stat-change"><span id="stat-branch-only-loans">All Branches Combined</span></p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon blue-icon"><i class="fa-solid fa-address-book"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Loan Accounts</h3>
+                                <div class="stat-value" id="stat-total-accounts">0</div>
+                                <p class="stat-sub">Active gold loan ledgers</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon yellow-icon"><i class="fa-solid fa-weight-hanging"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Vault Gold Weight</h3>
+                                <div class="stat-value" id="stat-total-weight">0.000 g</div>
+                                <p class="stat-sub">Vault weight in grams</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green-icon"><i class="fa-solid fa-user-shield"></i></div>
+                            <div class="stat-info">
+                                <h3>Active Valuers</h3>
+                                <div class="stat-value" id="stat-total-valuers">0</div>
+                                <p class="stat-sub">Registered gold soni valuers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Entries & Shortcuts -->
+                    <div class="dashboard-details-grid">
+                        <div class="details-card">
+                            <div class="details-card-header">
+                                <h3><i class="fa-solid fa-history"></i> Today's Gold Loan Entries</h3>
+                                <button class="btn btn-link view-all-register-btn">View Register <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" id="dashboard-recent-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Account No</th>
+                                            <th>Borrower Name</th>
+                                            <th>Product Code</th>
+                                            <th>Loan Amount</th>
+                                            <th>Packet No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">No loans created today.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="details-card">
+                            <h3><i class="fa-solid fa-bolt"></i> Quick Actions</h3>
+                            <div class="shortcuts-list">
+                                <button class="shortcut-btn" data-go-tab="entry-view">
+                                    <i class="fa-solid fa-plus-circle"></i>
+                                    <span>New Loan Entry</span>
+                                </button>
+                                <button class="shortcut-btn" data-go-tab="valuer-master-view">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    <span>Add Valuer</span>
+                                </button>
+                                <button class="shortcut-btn" data-go-tab="daily-vouchers-view">
+                                    <i class="fa-solid fa-print"></i>
+                                    <span>Daily Vouchers</span>
+                                </button>
+                                <button class="shortcut-btn" data-go-tab="settings-view">
+                                    <i class="fa-solid fa-cog"></i>
+                                    <span>Settings</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. GOLD LOAN ENTRY VIEW -->
+                <section id="entry-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-file-medical"></i> Gold Loan Entry Sheet</h2>
+                        <p>Input new gold loan ledger details and calculate deductions</p>
+                    </div>
+
+                    <!-- Rate Warning Alert -->
+                    <div id="rate-missing-alert" class="warning-alert">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span><strong>Warning:</strong> Gold market rate is not set for today. Set rate in dashboard or enter here:</span>
+                        <input type="number" id="inline-gold-rate" placeholder="Rate/10g e.g. 65000" class="small-inline-input">
+                        <button id="inline-save-rate-btn" class="btn btn-sm btn-gold">Save</button>
+                    </div>
+
+                    <form id="gold-loan-form" class="gold-loan-grid">
+                        <!-- Left Block: Basic Details -->
+                        <div class="form-section-card">
+                            <h3 class="section-title"><i class="fa-solid fa-circle-info"></i> 1. Basic Details</h3>
+                            
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="loan-date">Loan Date</label>
+                                    <input type="date" id="loan-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Loan Type (Status)</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="loan-status" value="New" checked> New
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="loan-status" value="Old"> Old/Renew
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="is-member">Bank Member Status</label>
+                                    <select id="is-member" required>
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="packet-no">Gold Packet Number</label>
+                                    <input type="number" id="packet-no" placeholder="Auto-calculated" required>
+                                    <small class="helper-text">Auto-increments from yesterday's last packet serial</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valuer-select">Ornaments Soni Valuer</label>
+                                    <select id="valuer-select" required>
+                                        <option value="">-- Select Valuer --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="is-new-member-checkbox" class="checkbox-container-label">
+                                    <input type="checkbox" id="is-new-member-checkbox"> Is Borrower becoming a **New Member**? (Applies Share Capital & Member Fee)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Customer Profile Details -->
+                        <div class="form-section-card">
+                            <h3 class="section-title"><i class="fa-solid fa-user-shield"></i> 2. Customer Profile Details</h3>
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="cust-no">Customer Number</label>
+                                    <input type="text" id="cust-no" placeholder="Enter Customer Number" required>
+                                    <small class="helper-text">Lookup from profile database or enter new</small>
+                                </div>
+                                <div class="form-group" id="member-no-group">
+                                    <label for="member-no">Membership Number</label>
+                                    <input type="text" id="member-no" placeholder="Enter Member ID">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-name">Customer Name</label>
+                                <input type="text" id="cust-name" placeholder="Enter Customer Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-address">Address</label>
+                                <textarea id="cust-address" placeholder="Enter Full Address" rows="2" required></textarea>
+                            </div>
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="cust-savings-ac">Savings Account Number</label>
+                                    <input type="text" id="cust-savings-ac" placeholder="Enter Savings A/c No" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cust-age">Age</label>
+                                    <input type="number" id="cust-age" placeholder="Age" required min="1" max="120">
+                                </div>
+                            </div>
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="cust-occupation">Occupation / ધંધો</label>
+                                    <input type="text" id="cust-occupation" placeholder="Occupation" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cust-religion">Religion / ધર્મ</label>
+                                    <input type="text" id="cust-religion" placeholder="Religion" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-mobile">Mobile Number</label>
+                                <input type="tel" id="cust-mobile" placeholder="Mobile Number" required pattern="[0-9]{10}">
+                            </div>
+
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="cust-nominee-name">Nominee Name</label>
+                                    <input type="text" id="cust-nominee-name" placeholder="Nominee Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cust-nominee-relation">Nominee Relation</label>
+                                    <input type="text" id="cust-nominee-relation" placeholder="Relation" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Loan & Gold Details -->
+                        <div class="form-section-card">
+                            <h3 class="section-title"><i class="fa-solid fa-coins"></i> 3. Loan & Gold Details</h3>
+
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="loan-amount">Sanctioned Loan Amount (₹)</label>
+                                    <input type="number" id="loan-amount" placeholder="e.g. 150000" min="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="loan-amount-words">Amount in Words (₹)</label>
+                                    <input type="text" id="loan-amount-words" class="highlight-input" readonly placeholder="Auto-calculated in Words">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loan-purpose">Loan Purpose / ધિરાણનો હેતુ</label>
+                                <input type="text" id="loan-purpose" placeholder="e.g. Personal Business / Personal Use" required>
+                            </div>
+
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="loan-category-display">Loan Product Code</label>
+                                    <div id="product-code-container">
+                                        <input type="text" id="loan-category-display" class="highlight-input" readonly placeholder="Auto-selected">
+                                        <select id="loan-category-select" class="highlight-input hidden">
+                                            <option value="">-- Select Scheme --</option>
+                                            <option value="GNA-3527">GNA-3527 (Installment)</option>
+                                            <option value="GOD-3553">GOD-3553 (Overdraft)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="loan-ac-no">Loan Account Number</label>
+                                    <input type="text" id="loan-ac-no" class="highlight-input" readonly placeholder="Auto-generated">
+                                </div>
+                            </div>
+
+                            <div class="form-row two-col">
+                                <div class="form-group">
+                                    <label for="interest-rate-display">Interest Rate (Fix %)</label>
+                                    <input type="text" id="interest-rate-display" readonly placeholder="Auto-selected">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gold-weight">Gold Ornaments Weight (Grams)</label>
+                                    <input type="number" id="gold-weight" placeholder="e.g. 6.545" step="0.001" min="0.001" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ornaments-desc">Ornaments Description</label>
+                                <input type="text" id="ornaments-desc" placeholder="e.g. Gold Ring x2, Bangle x1" required>
+                            </div>
+
+                            <div class="valuation-summary-box">
+                                <div class="val-row">
+                                    <span>Gold Market Rate (per 10g):</span>
+                                    <strong id="val-rate-display">₹0</strong>
+                                </div>
+                                <div class="val-row">
+                                    <span>Ornaments Market Value:</span>
+                                    <strong id="val-market-val-display" class="gold-color">₹0</strong>
+                                </div>
+                                <div class="val-row">
+                                    <span>Eligible Loan Amount (75%):</span>
+                                    <strong id="val-eligible-display" class="green-color">₹0</strong>
+                                </div>
+                                <div class="val-row">
+                                    <span>Loan-To-Value (LTV Ratio):</span>
+                                    <strong id="val-ltv-display">0%</strong>
+                                </div>
+                                <div id="ltv-warning-badge" class="ltv-warning-alert hidden">
+                                    <i class="fa-solid fa-triangle-exclamation"></i> Warning: Loan amount exceeds 75% of market value limit!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Photo Uploads -->
+                        <div class="form-section-card span-two-cols">
+                            <h3 class="section-title"><i class="fa-solid fa-camera"></i> 4. Customer & Ornament Photos</h3>
+                            <div class="form-row two-col">
+                                <div class="form-group" style="flex:1;">
+                                    <label for="cust-photo-upload">Customer Photograph</label>
+                                    <div class="upload-preview-container">
+                                        <input type="file" id="cust-photo-upload" accept="image/*" class="photo-file-input">
+                                        <div id="cust-photo-preview" class="photo-preview-placeholder">
+                                            <i class="fa-regular fa-image"></i>
+                                            <span>No Image Chosen</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="flex:1;">
+                                    <label for="gold-photo-upload">Gold Ornaments Photograph</label>
+                                    <div class="upload-preview-container">
+                                        <input type="file" id="gold-photo-upload" accept="image/*" class="photo-file-input">
+                                        <div id="gold-photo-preview" class="photo-preview-placeholder">
+                                            <i class="fa-regular fa-image"></i>
+                                            <span>No Image Chosen</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Block: Charges & Calculation Grid -->
+                        <div class="form-section-card span-two-cols">
+                            <h3 class="section-title"><i class="fa-solid fa-calculator"></i> 3. Deductions & Banking Service Charges</h3>
+                            
+                            <div class="charges-calc-grid">
+                                <div class="form-group">
+                                    <label for="charge-share-a">Share Group A (₹)</label>
+                                    <input type="number" id="charge-share-a" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-share-b">Share Group B (₹)</label>
+                                    <input type="number" id="charge-share-b" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-member-fee">Member Fee (₹)</label>
+                                    <input type="number" id="charge-member-fee" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-valuation">Valuation Charge (₹)</label>
+                                    <input type="number" id="charge-valuation" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-stamp">Stamp Duty (₹)</label>
+                                    <input type="number" id="charge-stamp" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-service">Service Charge (₹)</label>
+                                    <input type="number" id="charge-service" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-document">Document Charge (₹)</label>
+                                    <input type="number" id="charge-document" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-insurance">Insurance Charge (₹)</label>
+                                    <input type="number" id="charge-insurance" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-cgst">CGST (9%) (₹)</label>
+                                    <input type="number" id="charge-cgst" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-sgst">SGST (9%) (₹)</label>
+                                    <input type="number" id="charge-sgst" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="charge-adjustment">Manual Adjustment (+/- ₹)</label>
+                                    <input type="number" id="charge-adjustment" value="0">
+                                </div>
+                                <div class="form-group highlight-box">
+                                    <label for="charge-total" class="bold-text">Total Deductions (₹)</label>
+                                    <input type="number" id="charge-total" class="bold-text font-lg" readonly>
+                                </div>
+                            </div>
+
+                            <div class="net-disbursal-card">
+                                <div class="net-item">
+                                    <span class="net-label">Sanctioned Loan Amount:</span>
+                                    <span class="net-val" id="summary-sanctioned-amt">₹0.00</span>
+                                </div>
+                                <div class="net-item-operator">-</div>
+                                <div class="net-item">
+                                    <span class="net-label">Total Deductions:</span>
+                                    <span class="net-val text-red" id="summary-deductions-amt">₹0.00</span>
+                                </div>
+                                <div class="net-item-operator">=</div>
+                                <div class="net-item highlight-net">
+                                    <span class="net-label-main">Net Payable to Borrower:</span>
+                                    <span class="net-val-main" id="summary-net-disbursal">₹0.00</span>
+                                </div>
+                            </div>
+
+                            <div class="form-actions-row">
+                                <button type="button" id="reset-loan-form-btn" class="btn btn-secondary">
+                                    <i class="fa-solid fa-arrows-rotate"></i> Reset Form
+                                </button>
+                                <button type="submit" class="btn btn-gold-success font-lg">
+                                    <i class="fa-solid fa-save"></i> Save Record & Generate Voucher
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- 3. LOAN REGISTER / DATA GRID VIEW -->
+                <section id="register-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-list-check"></i> Gold Loan Register</h2>
+                        <p>Search, filter, and export branch ledger logs</p>
+                    </div>
+
+                    <!-- Search Filter Card -->
+                    <div class="filter-card card">
+                        <div class="filter-grid">
+                            <div class="form-group">
+                                <label for="filter-search">Search Text (Name / Account / Packet)</label>
+                                <input type="text" id="filter-search" placeholder="Type query here...">
+                            </div>
+                            <div class="form-group">
+                                <label for="filter-branch">Branch Office Filter</label>
+                                <select id="filter-branch">
+                                    <option value="">-- All Branches --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="filter-date-from">Date From</label>
+                                <input type="date" id="filter-date-from">
+                            </div>
+                            <div class="form-group">
+                                <label for="filter-date-to">Date To</label>
+                                <input type="date" id="filter-date-to">
+                            </div>
+                            <div class="form-group">
+                                <label for="filter-product">Scheme Code</label>
+                                <select id="filter-product">
+                                    <option value="">-- All Schemes --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button id="clear-filters-btn" class="btn btn-secondary-sm">
+                                <i class="fa-solid fa-filter-circle-xmark"></i> Clear Filters
+                            </button>
+                            <button id="export-csv-btn" class="btn btn-success-sm">
+                                <i class="fa-solid fa-file-excel"></i> Export Ledger to CSV (Excel)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Data Grid Card -->
+                    <div class="card margin-top">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" id="loans-register-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Branch</th>
+                                        <th>Account No</th>
+                                        <th>Packet No</th>
+                                        <th>Borrower Name</th>
+                                        <th>Product</th>
+                                        <th>Loan Amt (₹)</th>
+                                        <th>Weight</th>
+                                        <th>Deductions (₹)</th>
+                                        <th>Net Paid (₹)</th>
+                                        <th>Print Voucher</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="register-tbody">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="register-empty-msg" class="empty-state text-center hidden">
+                            <i class="fa-regular fa-folder-open font-xl"></i>
+                            <p>No gold loans found matching these filter settings.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW TAB: DAILY VOUCHERS VIEW -->
+                <section id="daily-vouchers-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-print"></i> Daily Cash Credit Vouchers</h2>
+                        <p>Generate aggregated account credit logs for daily transaction summaries</p>
+                    </div>
+
+                    <div class="filter-card card">
+                        <div class="filter-grid" style="grid-template-columns: 1fr 2fr;">
+                            <div class="form-group">
+                                <label for="voucher-date-select">Voucher Date</label>
+                                <input type="date" id="voucher-date-select" required>
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: flex-end; gap: 10px;">
+                                <button id="load-vouchers-btn" class="btn btn-primary" style="margin-bottom: 16px;">
+                                    <i class="fa-solid fa-arrows-rotate"></i> Load Day Summary
+                                </button>
+                                <button id="print-vouchers-btn" class="btn btn-gold-success" style="margin-bottom: 16px;">
+                                    <i class="fa-solid fa-print"></i> Print Cash Credit Vouchers (3-in-1 A4)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card margin-top">
+                        <h3>Accounting Credits Summary</h3>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" id="daily-vouchers-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>GL Head / Account Header</th>
+                                        <th>Account Code</th>
+                                        <th>Aggregated Sum (₹)</th>
+                                        <th>Sum in Words</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="daily-vouchers-tbody">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. BRANCH MASTER VIEW -->
+                <section id="branch-master-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-code-branch"></i> Branch Master</h2>
+                        <p>Create new bank branches and manage log credentials</p>
+                    </div>
+
+                    <div class="master-layout-grid">
+                        <div class="master-form-card card">
+                            <h3>Add New Branch Office</h3>
+                            <form id="branch-master-form">
+                                <div class="form-group">
+                                    <label for="branch-code">Branch Code</label>
+                                    <input type="text" id="branch-code" placeholder="e.g. 18" required maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="branch-name">Branch Name</label>
+                                    <input type="text" id="branch-name" placeholder="e.g. SURAT BRANCH" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="fa-solid fa-plus"></i> Save Branch
+                                </button>
+                            </form>
+                        </div>
+                        <div class="master-list-card card">
+                            <h3>Active Bank Branches</h3>
+                            <div class="table-responsive max-height-list">
+                                <table class="table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Branch Title</th>
+                                            <th>Passcode Rule</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="branch-list-tbody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. VALUER MASTER VIEW -->
+                <section id="valuer-master-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-user-tie"></i> Gold Ornaments Valuer Master</h2>
+                        <p>Register and manage certified gold soni inspectors</p>
+                    </div>
+
+                    <div class="master-layout-grid">
+                        <div class="master-form-card card">
+                            <h3>Register New Valuer</h3>
+                            <form id="valuer-master-form">
+                                <div class="form-group">
+                                    <label for="valuer-name">Valuer Full Name</label>
+                                    <input type="text" id="valuer-name" placeholder="e.g. Soni Ramjibhai Pragjibhai" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valuer-mobile">Mobile Number (10 digit)</label>
+                                    <input type="tel" id="valuer-mobile" placeholder="9876543210" required pattern="[0-9]{10}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="valuer-address">Address</label>
+                                    <input type="text" id="valuer-address" placeholder="Zaveri Bazar, Junagadh" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valuer-savings-ac">Savings Bank Account No</label>
+                                    <input type="text" id="valuer-savings-ac" placeholder="Enter Savings A/c No" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="fa-solid fa-user-plus"></i> Register Valuer
+                                </button>
+                            </form>
+                        </div>
+                        <div class="master-list-card card">
+                            <h3>Authorized Gold Inspectors</h3>
+                            <div class="table-responsive">
+                                <table class="table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Valuer Name</th>
+                                            <th>Mobile</th>
+                                            <th>Address</th>
+                                            <th>Savings A/c</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="valuer-list-tbody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. PRODUCT MASTER VIEW -->
+                <section id="product-master-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-tags"></i> Product Master</h2>
+                        <p>Configure gold loan schemes, limits, and interest parameters</p>
+                    </div>
+
+                    <div class="master-layout-grid">
+                        <div class="master-form-card card">
+                            <h3>Add/Edit Loan Product</h3>
+                            <form id="product-master-form">
+                                <input type="hidden" id="edit-product-id">
+                                <div class="form-group">
+                                    <label for="prod-code">Product Code (Scheme Header)</label>
+                                    <input type="text" id="prod-code" placeholder="e.g. GW-3725" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-min-amt">Minimum Amount (₹)</label>
+                                    <input type="number" id="prod-min-amt" value="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-max-amt">Maximum Amount (₹)</label>
+                                    <input type="number" id="prod-max-amt" placeholder="e.g. 100000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-interest-rate">Interest Rate (Fix %)</label>
+                                    <input type="number" id="prod-interest-rate" placeholder="e.g. 11.50" step="0.01" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-desc">Description Title</label>
+                                    <input type="text" id="prod-desc" placeholder="e.g. Gold Loan Scheme under 50K" required>
+                                </div>
+                                <button type="submit" id="product-save-btn" class="btn btn-primary btn-block">
+                                    <i class="fa-solid fa-save"></i> Save Product
+                                </button>
+                                <button type="button" id="product-cancel-edit-btn" class="btn btn-secondary-sm btn-block hidden">
+                                    Cancel Edit
+                                </button>
+                            </form>
+                        </div>
+                        <div class="master-list-card card">
+                            <h3>Configured Gold Loan Schemes</h3>
+                            <div class="table-responsive">
+                                <table class="table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Boundaries (₹)</th>
+                                            <th>Interest</th>
+                                            <th>Title</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="product-list-tbody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. SETTINGS VIEW -->
+                <section id="settings-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-sliders"></i> Account & Serial Seeds Settings</h2>
+                        <p>Configure starting sequences for gold packet counts and account ledger codes</p>
+                    </div>
+
+                    <!-- Branch Selector for Settings -->
+                    <div class="card" id="settings-branch-select-group" style="margin-bottom: 20px;">
+                        <h3><i class="fa-solid fa-building-columns"></i> Configure Branch Sequences</h3>
+                        <p class="helper-text-block">Select which branch's sequences you want to view and configure.</p>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="settings-branch-select">Target Branch</label>
+                            <select id="settings-branch-select" style="width: 100%; max-width: 400px; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--card-bg); color: var(--text-main); font-weight: 500;"></select>
+                        </div>
+                    </div>
+
+                    <!-- Head Office Backup Card -->
+                    <div class="card margin-top" id="ho-backup-card" style="display: none; margin-bottom: 20px;">
+                        <h3 class="gold-color"><i class="fa-solid fa-cloud-arrow-down"></i> Head Office Data Backup Center</h3>
+                        <p class="helper-text-block">Export all branch loan ledgers as individual Excel-compatible CSV sheets. You can choose a local folder (e.g., <code>E:\GOLD LOAN ENTRY BAKCUP</code>) to save directly.</p>
+                        
+                        <div class="backup-status-container" style="margin-top: 15px; padding: 12px; border-radius: 6px; border: 1.5px solid #000000; background-color: var(--bg-primary); display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <strong>Auto-Backup Status:</strong> <span id="backup-folder-status" class="text-red">Not Set</span><br>
+                                <small class="helper-text" id="backup-folder-path">Select a folder to enable daily 6:00 PM auto-backup.</small>
+                            </div>
+                            <span class="indicator-dot" id="backup-status-dot" style="width: 10px; height: 10px; border-radius: 50%; display: inline-block; background-color: var(--danger); box-shadow: 0 0 8px var(--danger); flex-shrink: 0; margin-left: 10px;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button id="btn-ho-backup-select" type="button" class="btn btn-gold" style="flex: 1;">
+                                <i class="fa-solid fa-folder-open"></i> Select Folder & Back Up Now
+                            </button>
+                            <button id="btn-ho-backup-manual" type="button" class="btn btn-primary" style="flex: 1; display: none;">
+                                <i class="fa-solid fa-arrows-rotate"></i> Sync Backup Now
+                            </button>
+                        </div>
+                        
+                        <p class="helper-text" style="color: var(--danger); margin-top: 10px;">* Note: Browser security rules require the gold loan portal tab to remain open in order for the 6:00 PM auto-backup to execute.</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Initial Account Numbers -->
+                        <div class="card">
+                            <h3><i class="fa-solid fa-hashtag"></i> Starting Account Numbers</h3>
+                            <p class="helper-text-block">Set starting sequence integers for new accounts. Serials increment automatically on date change once set.</p>
+                            <form id="settings-accounts-form" class="margin-top">
+                                <!-- Generated Dynamically based on current products -->
+                                <div id="account-seeds-container"></div>
+                                <button type="submit" class="btn btn-primary margin-top">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Sequences
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- General & Packet Serial Config -->
+                        <div class="card">
+                            <h3><i class="fa-solid fa-box-archive"></i> Packet Numbers & Reset Systems</h3>
+                            <form id="settings-general-form" class="margin-top">
+                                <div class="form-group">
+                                    <label for="seed-last-packet-no">Starting Packet Number Seed</label>
+                                    <input type="number" id="seed-last-packet-no" placeholder="e.g. 100">
+                                </div>
+                                <button type="submit" class="btn btn-primary margin-top">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Packet Seeds
+                                </button>
+                            </form>
+
+                            <hr class="margin-top margin-bottom">
+
+                            <h3 class="text-red"><i class="fa-solid fa-triangle-exclamation"></i> Factory Reset Portal</h3>
+                            <p class="helper-text-block">Executing a reset deletes all transactions, registered valuers, and custom configurations permanently.</p>
+                            <button id="reset-system-data-btn" class="btn btn-danger margin-top">
+                                <i class="fa-solid fa-trash-can"></i> Delete All Stored Data
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. CUSTOMER MASTER VIEW -->
+                <section id="customer-master-view" class="tab-content hidden">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-users"></i> Customer Profiles Directory</h2>
+                        <p>Manage member credentials, contact information, and KYC files</p>
+                    </div>
+
+                    <div class="master-layout-grid">
+                        <!-- Left Block: Add/Edit Customer -->
+                        <div class="master-form-card card">
+                            <h3 id="customer-form-title">Register New Customer</h3>
+                            <form id="customer-master-form">
+                                <input type="hidden" id="edit-customer-id">
+                                <div class="form-row two-col">
+                                    <div class="form-group">
+                                        <label for="m-cust-no">Customer Number</label>
+                                        <input type="text" id="m-cust-no" placeholder="e.g. 101" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="m-cust-member-no">Membership Number</label>
+                                        <input type="text" id="m-cust-member-no" placeholder="Enter Membership ID">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-cust-name">Customer Full Name</label>
+                                    <input type="text" id="m-cust-name" placeholder="Full Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-cust-address">Address</label>
+                                    <input type="text" id="m-cust-address" placeholder="Address" required>
+                                </div>
+                                <div class="form-row two-col">
+                                    <div class="form-group">
+                                        <label for="m-cust-savings-ac">Savings Account No</label>
+                                        <input type="text" id="m-cust-savings-ac" placeholder="Savings A/c" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="m-cust-age">Age</label>
+                                        <input type="number" id="m-cust-age" placeholder="Age" required min="1">
+                                    </div>
+                                </div>
+                                <div class="form-row two-col">
+                                    <div class="form-group">
+                                        <label for="m-cust-occupation">Occupation / ધંધો</label>
+                                        <input type="text" id="m-cust-occupation" placeholder="Occupation" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="m-cust-religion">Religion / ધર્મ</label>
+                                        <input type="text" id="m-cust-religion" placeholder="Religion" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-cust-mobile">Mobile Number</label>
+                                    <input type="tel" id="m-cust-mobile" placeholder="Mobile" required pattern="[0-9]{10}">
+                                </div>
+
+                                <div class="form-row two-col">
+                                    <div class="form-group">
+                                        <label for="m-cust-nominee-name">Nominee Name</label>
+                                        <input type="text" id="m-cust-nominee-name" placeholder="Nominee" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="m-cust-nominee-relation">Nominee Relation</label>
+                                        <input type="text" id="m-cust-nominee-relation" placeholder="Relation" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-cust-photo-upload">Customer Photo</label>
+                                    <div class="upload-preview-container">
+                                        <input type="file" id="m-cust-photo-upload" accept="image/*" class="photo-file-input">
+                                        <div id="m-cust-photo-preview" class="photo-preview-placeholder">
+                                            <i class="fa-regular fa-image"></i>
+                                            <span>No Photo Selected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" id="customer-save-btn" class="btn btn-primary btn-block">
+                                    <i class="fa-solid fa-save"></i> Save Customer Profile
+                                </button>
+                                <button type="button" id="customer-cancel-edit-btn" class="btn btn-secondary btn-block hidden" style="margin-top:8px;">
+                                    Cancel Edit
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Right Block: Search and List -->
+                        <div class="master-list-card card">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                                <h3>Registered Customer Directory</h3>
+                                <input type="text" id="customer-dir-search" placeholder="Search by ID or Name..." style="width:200px; padding:6px 10px; font-size:12px; border:1.5px solid #000000; border-radius:4px;">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Photo</th>
+                                            <th>ID</th>
+                                            <th>Customer Name</th>
+                                            <th>Mobile</th>
+                                            <th>Nominee</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="customer-list-tbody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== PRINT OPTIONS POPUP MODAL ==================== -->
+    <div id="print-modal" class="modal hidden">
+        <div class="modal-content glassmorphism">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-print"></i> Document Print Center</h3>
+                <button id="close-print-modal-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom:20px; font-size:13px; color:var(--text-secondary);">Select the document you wish to generate and print on A4 sheet:</p>
+                <div class="print-options-grid">
+                    <button class="print-option-card" id="btn-print-single-a4">
+                        <div class="option-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <h4>A4 Sanction Slip</h4>
+                        <p>Detailed loan information, terms & conditions, charges & signature block.</p>
+                    </button>
+                    <button class="print-option-card" id="btn-print-three-in-one">
+                        <div class="option-icon"><i class="fa-solid fa-receipt"></i></div>
+                        <h4>3-in-1 Voucher</h4>
+                        <p>Aggregated slips split into Bank Copy, Borrower Copy, and Vault Packet Copy.</p>
+                    </button>
+                    <button class="print-option-card" id="btn-print-application-form">
+                        <div class="option-icon"><i class="fa-solid fa-file-signature"></i></div>
+                        <h4>Loan Requisition Form (Gujarati)</h4>
+                        <p>Official bank application request form formatted with customer photo.</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VOUCHER PRINT TEMPLATE (HIDDEN ON SCREEN) ==================== -->
+    <div id="print-area">
+        <!-- Dynamic print injections will go here -->
+    </div>
+
+    <!-- ==================== IMAGE CROPPER POPUP MODAL ==================== -->
+    <div id="crop-modal" class="modal hidden">
+        <div class="modal-content glassmorphism" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-crop-simple"></i> Crop Photograph</h3>
+                <button id="close-crop-modal-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="max-height: 350px; display: flex; justify-content: center; align-items: center; background-color: #000; overflow: hidden; border-radius: 6px;">
+                    <img id="crop-image-element" style="max-width: 100%; max-height: 350px; display: block;">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button id="btn-crop-save" class="btn btn-primary" style="flex: 1;">
+                        <i class="fa-solid fa-check"></i> Crop & Save
+                    </button>
+                    <button id="btn-crop-cancel" class="btn btn-secondary" style="flex: 1;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+    <script src="app_new.js"></script>
+</body>
+</html>
