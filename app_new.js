@@ -95,8 +95,17 @@ async function loadState() {
             stored = data;
         }
 
+        let localSession = null;
+        try {
+            const raw = localStorage.getItem("jccb_current_session");
+            if (raw) localSession = JSON.parse(raw);
+        } catch(e) {}
+        const localEditingLoanId = typeof state !== 'undefined' && state ? state.editingLoanId : null;
+
         if (stored) {
             state = JSON.parse(stored);
+            state.currentSession = localSession;
+            state.editingLoanId = localEditingLoanId;
             
             // Migrate old product codes (3527 -> GNA-3527, 3553 -> GOD-3553)
             if (state.products) {
@@ -191,7 +200,12 @@ async function loadState() {
                 state.lastPacketSeed[b.code] = 100;
             });
             
-            state.currentSession = null;
+            let localSession = null;
+            try {
+                const raw = localStorage.getItem("jccb_current_session");
+                if (raw) localSession = JSON.parse(raw);
+            } catch(e) {}
+            state.currentSession = localSession;
             await saveState();
         }
     } catch (e) {
@@ -205,7 +219,10 @@ async function loadState() {
 async function saveState() {
     showSync();
     try {
-        const dataStr = JSON.stringify(state);
+        const stateToUpload = { ...state };
+        delete stateToUpload.currentSession;
+        delete stateToUpload.editingLoanId;
+        const dataStr = JSON.stringify(stateToUpload);
         await fetch(GOOGLE_SCRIPT_URL, {
             method: "POST",
             body: dataStr,
@@ -422,6 +439,7 @@ function initAuth() {
         if (isValid) {
             loginError.classList.add("hidden");
             state.currentSession = branch;
+            localStorage.setItem("jccb_current_session", JSON.stringify(branch));
             saveState();
             enterApp();
         } else {
@@ -431,6 +449,7 @@ function initAuth() {
 
     logoutBtn.addEventListener("click", () => {
         state.currentSession = null;
+        localStorage.removeItem("jccb_current_session");
         saveState();
         exitApp();
     });
